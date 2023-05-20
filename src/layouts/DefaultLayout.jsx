@@ -14,7 +14,7 @@ const DefaultLayout = ({ children }) => {
 };
 
 DefaultLayout.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.object,
 };
 
 export default DefaultLayout;

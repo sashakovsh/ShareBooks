@@ -1,18 +1,29 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { Card, Button } from "antd";
+import { StarOutlined } from "@ant-design/icons";
+import styles from "./index.module.scss";
 
-const Books = ({ name, author }) => {
+const BookCard = (book) => {
   return (
-    <div>
-      <h3>{name}</h3>
-      <p>{author}</p>
-    </div>
+    <Card
+      hoverable
+      className={styles.card}
+      style={{ width: 240 }}
+      key={book.id}
+      title={book.name}
+      cover={<img alt="example" src={book.img} />}
+      extra={
+        <Button
+          shape="circle"
+          icon={<StarOutlined />}
+          style={{ color: "white", zIndex: 10 }}
+          // onClick={() => handleClick(book.id)}
+        />
+      }
+    >
+      {book.author}
+    </Card>
   );
 };
 
-Books.propTypes = {
-  author: PropTypes.array.isRequired,
-  name: PropTypes.string.isRequired,
-};
-
-export default Books;
+export default BookCard;
