@@ -1,0 +1,16 @@
+.content {
+display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 50px 0;
+}
+
+.card {
+    width: 31.5%;
+}
+
+:global {
+    .ant-card-cover img {
+        height: 360px;
+    }
+}

@@ -23,7 +23,7 @@ const Header = () => {
             defaultSelectedKeys={[location.pathname]}
             onSelect={({ key }) => navigate(key)}
             items={[
-              { key: "/home", label: "Главная" },
+              { key: "/", label: "Главная" },
               { key: "/profile", label: "Профиль" },
               { key: "/recommended", label: "Рекомендации" },
               { key: "/favourite", label: "Избранное" },
