@@ -3,7 +3,7 @@ import DefaultLayout from "../../layouts/DefaultLayout";
 import { Card, Button } from "antd";
 import { StarOutlined } from "@ant-design/icons";
 import styles from "./index.module.scss";
-import { books, addFav} from "../../api/favBooks";
+import {recBooks, addFav} from "../../api/favBooks";
 
 const { Meta } = Card;
 
@@ -13,7 +13,7 @@ const RecsPage = () => {
       <DefaultLayout>
         <>
           <div className={styles.content}>
-            {books.map((book) => (
+            {recBooks.map((book) => (
               <Card
                 hoverable
                 className={styles.card}
