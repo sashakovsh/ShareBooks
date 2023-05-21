@@ -5,58 +5,59 @@ import axios from "axios";
 import { Card, Button } from "antd";
 import styles from "./index.module.scss";
 import { StarOutlined, StarFilled } from "@ant-design/icons";
+import { books, favBooks, addFav} from "../../api/favBooks";
 
 const { Meta } = Card;
-const FAVOURITE_BD_PATH = "https://anapioficeandfire.com/api/books";
+// const FAVOURITE_BD_PATH = "https://anapioficeandfire.com/api/books";
 
-class FavouritePage extends React.Component {
-  state = {
-    isLoading: true,
-    favBooksList: [],
-  };
+// class FavouritePage extends React.Component {
+//   state = {
+//     isLoading: true,
+//     favBooksList: [],
+//   };
 
-  getBooks = async () => {
-    await axios.get("/books").then((res) => {
-      const favBooksList = res.data;
-      this.setState({ favBooksList: favBooksList, isLoading: false });
-    });
-    this.allFavourite();
-  };
+//   getBooks = async () => {
+//     await axios.get("/books").then((res) => {
+//       const favBooksList = res.data;
+//       this.setState({ favBooksList: favBooksList, isLoading: false });
+//     });
+//     this.allFavourite();
+//   };
 
-  componentDidMount() {
-    this.getBooks();
-  }
+//   componentDidMount() {
+//     this.getBooks();
+//   }
 
-  allFavourite() {
-    this.setState((prevState) => {
-      const updatedFavBooksList = prevState.favBooksList.map((obj) => ({
-        ...obj,
-        isFavourite: true,
-      }));
-      return {
-        favBooksList: updatedFavBooksList,
-      };
-    });
-  }
+//   allFavourite() {
+//     this.setState((prevState) => {
+//       const updatedFavBooksList = prevState.favBooksList.map((obj) => ({
+//         ...obj,
+//         isFavourite: true,
+//       }));
+//       return {
+//         favBooksList: updatedFavBooksList,
+//       };
+//     });
+//   }
 
-  unfavourite(id) {
-    this.setState((prevState) => {
-      const updatedFavBooksList = prevState.favBooksList.map((obj) => {
-        if (obj.id === id) {
-          return { ...obj, isFavourite: false };
-        }
-        return obj;
-      });
+//   unfavourite(id) {
+//     this.setState((prevState) => {
+//       const updatedFavBooksList = prevState.favBooksList.map((obj) => {
+//         if (obj.id === id) {
+//           return { ...obj, isFavourite: false };
+//         }
+//         return obj;
+//       });
 
-      return {
-        favBooksList: updatedFavBooksList,
-      };
-    });
-  }
+//       return {
+//         favBooksList: updatedFavBooksList,
+//       };
+//     });
+//   }
 
-  render() {
-    const { isLoading, favBooksList } = this.state;
-
+  // render() {
+    // const { isLoading, favBooksList } = this.state;
+const FavouritePage = () => {
     return (
       <DefaultLayout>
         <div className={styles.container}>
@@ -66,10 +67,11 @@ class FavouritePage extends React.Component {
           />
           <h1> Вот список книг, на которые вы подписаны:</h1>
           <div className={styles.content}>
-            {isLoading
+            {/* {isLoading
               ? "Loading..."
-              : favBooksList.map((book) => {
-                  if (book.isFavourite)
+              :  */}
+              {favBooks.map((book) => {
+                  // if (book.isFavourite)
                     return (
                       <>
                         <Card
@@ -82,7 +84,8 @@ class FavouritePage extends React.Component {
                             <Button
                               icon={<StarFilled />}
                               style={{ color: "blue" }}
-                              onClick={() => this.unfavourite(book.id)}
+                              // onClick={() => this.unfavourite(book.id)}
+                              onClick={() => addFav(book.id)}
                             />
                           }
                         >
@@ -96,6 +99,6 @@ class FavouritePage extends React.Component {
       </DefaultLayout>
     );
   }
-}
+// }
 
 export default FavouritePage;
