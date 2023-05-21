@@ -7,6 +7,21 @@ import styles from "./index.module.scss";
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const isAuth = () => {
+    if (localStorage.authenticated) {
+      return {
+        key: "/logout",
+        label: "Выйти",
+        show: true
+      }
+    } else {
+        return {
+          key: "/auth",
+          label: "Войти/Зарегистрироваться",
+          show: false
+        }
+    }
+  };
 
   return (
     <Layout.Header className={styles.root}>
@@ -24,9 +39,10 @@ const Header = () => {
             onSelect={({ key }) => navigate(key)}
             items={[
               { key: "/", label: "Главная" },
-              { key: "/profile", label: "Профиль" },
+              isAuth().show ? { key: "/profile", label: "Профиль" } : null,
               { key: "/recommended", label: "Рекомендации" },
               { key: "/favourite", label: "Избранное" },
+              { key: `${isAuth().key}`, label: `${isAuth().label}` }
             ]}
           />
         </div>
