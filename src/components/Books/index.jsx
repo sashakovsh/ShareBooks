@@ -4,6 +4,7 @@ import { StarOutlined } from "@ant-design/icons";
 import styles from "./index.module.scss";
 
 const BookCard = (book, onClick) => {
+  console.log(book)
   return (
     <Card
       hoverable
