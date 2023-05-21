@@ -3,7 +3,7 @@ import { Card, Button } from "antd";
 import { StarOutlined } from "@ant-design/icons";
 import styles from "./index.module.scss";
 
-const BookCard = (book) => {
+const BookCard = (book, onClick) => {
   return (
     <Card
       hoverable
@@ -17,7 +17,7 @@ const BookCard = (book) => {
           shape="circle"
           icon={<StarOutlined />}
           style={{ color: "white", zIndex: 10 }}
-          // onClick={() => handleClick(book.id)}
+          onClick={onClick}
         />
       }
     >

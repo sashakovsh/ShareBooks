@@ -2,36 +2,12 @@ import React from "react";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import { Card, Button } from "antd";
 import { StarOutlined } from "@ant-design/icons";
-// import { getAll } from "../../api/books";
 import styles from "./index.module.scss";
 import { books, addFav} from "../../api/favBooks";
 
 const { Meta } = Card;
 
-// const books = await getAll();
-
-// const books = [
-  // {
-  //   id: 1,
-  //   name: "Перемените обстановку",
-  //   author: "Джеймс Хедли Чейз",
-  //   img: "https://knigopoisk.org/media/books/55/553425d52eb5d.jpg",
-  // },
-  // {
-  //   id: 2,
-  //   name: "Легион. Ложь и тайна",
-  //   author: "Дэн Абнетт",
-  //   img: "https://knigopoisk.org/media/books/le/legion-lozh-i-tayna--62459.jpg",
-  // },
-  // {
-  //   id: 3,
-  //   name: "Племя тьмы",
-  //   author: "Клайв Баркер",
-  //   img: "https://knigopoisk.org/media/books/pl/plemya-t-my--82224.jpg",
-  // },
-// ];
-
-const HomePage = () => {
+const RecsPage = () => {
   return (
     <>
       <DefaultLayout>
@@ -62,4 +38,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default RecsPage;
