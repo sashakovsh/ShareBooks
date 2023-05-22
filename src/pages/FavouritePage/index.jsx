@@ -73,7 +73,6 @@ const FavouritePage = () => {
               {favBooks.map((book) => {
                   // if (book.isFavourite)
                     return (
-                      <>
                         <Card
                           hoverable
                           className={styles.card}
@@ -91,7 +90,6 @@ const FavouritePage = () => {
                         >
                           <Meta title={book.name} description={book.author} />
                         </Card>
-                      </>
                     );
                 })}
           </div>
