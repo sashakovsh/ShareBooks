@@ -37,7 +37,7 @@ const RegistrationPage = () => {
             <Form
                     name="registrationForm" 
                     labelCol={{ span: 8 }}
-                    style={{ maxWidth: 700, marginTop: 50 }}
+                    style={{ width: 700, paddingLeft: 155}}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     autoComplete="off"

@@ -18,7 +18,7 @@ const LogoutPage = () => {
                 <Row>
                     <Col span={10} offset={7}>
                         <h2>Подождите, выполняется выход</h2>
-                        <LoadingOutlined style={{ fontSize: 50 }}/>
+                        <LoadingOutlined style={{ fontSize: 50, margin: 100 }}/>
                     </Col>
                 </Row>
             </DefaultLayout>
