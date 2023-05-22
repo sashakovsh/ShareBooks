@@ -1,7 +1,7 @@
 import React from "react";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import { Card, Button } from "antd";
-import { StarOutlined } from "@ant-design/icons";
+import { StarOutlined, StarFilled } from "@ant-design/icons";
 import styles from "./index.module.scss";
 import {recBooks, addFav} from "../../api/favBooks";
 
@@ -23,13 +23,13 @@ const RecsPage = () => {
                 style={{ width: 300 }}
                 key={book.id}
                 cover={<img alt="example" src={book.img} />}
-                extra={
-                  <Button
-                    icon={<StarOutlined />}
-                    style={{ color: "blue" }}
-                    onClick={() => addFav(book.id)}
-                  />
-                }
+                // extra={
+                //   <Button
+                //     icon={<StarOutlined />}
+                //     style={{ color: "blue" }}
+                //     onClick={() => addFav(book.id)}
+                //   />
+                // }
               >
                 <Meta title={book.name} description={book.author} />
               </Card>

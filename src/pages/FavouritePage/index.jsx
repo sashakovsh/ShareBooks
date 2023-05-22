@@ -10,54 +10,52 @@ import { books, favBooks, addFav} from "../../api/favBooks";
 const { Meta } = Card;
 // const FAVOURITE_BD_PATH = "https://anapioficeandfire.com/api/books";
 
-// class FavouritePage extends React.Component {
-//   state = {
-//     isLoading: true,
-//     favBooksList: [],
-//   };
+class FavouritePage extends React.Component {
+  state = {
+    isLoading: true,
+    favBooksList: [],
+  };
 
-//   getBooks = async () => {
-//     await axios.get("/books").then((res) => {
-//       const favBooksList = res.data;
-//       this.setState({ favBooksList: favBooksList, isLoading: false });
-//     });
-//     this.allFavourite();
-//   };
+  getBooks = () => {
+      const favBooksList = favBooks;
+      this.setState({ favBooksList: favBooksList, isLoading: false });
+    this.allFavourite();
+  };
 
-//   componentDidMount() {
-//     this.getBooks();
-//   }
+  componentDidMount() {
+    this.getBooks();
+  }
 
-//   allFavourite() {
-//     this.setState((prevState) => {
-//       const updatedFavBooksList = prevState.favBooksList.map((obj) => ({
-//         ...obj,
-//         isFavourite: true,
-//       }));
-//       return {
-//         favBooksList: updatedFavBooksList,
-//       };
-//     });
-//   }
+  allFavourite() {
+    this.setState((prevState) => {
+      const updatedFavBooksList = prevState.favBooksList.map((obj) => ({
+        ...obj,
+        isFavourite: true,
+      }));
+      return {
+        favBooksList: updatedFavBooksList,
+      };
+    });
+  }
 
-//   unfavourite(id) {
-//     this.setState((prevState) => {
-//       const updatedFavBooksList = prevState.favBooksList.map((obj) => {
-//         if (obj.id === id) {
-//           return { ...obj, isFavourite: false };
-//         }
-//         return obj;
-//       });
+  unfavourite(id) {
+    this.setState((prevState) => {
+      const updatedFavBooksList = prevState.favBooksList.map((obj) => {
+        if (obj.id === id) {
+          return { ...obj, isFavourite: false };
+        }
+        return obj;
+      });
 
-//       return {
-//         favBooksList: updatedFavBooksList,
-//       };
-//     });
-//   }
+      return {
+        favBooksList: updatedFavBooksList,
+      };
+    });
+  }
 
-  // render() {
-    // const { isLoading, favBooksList } = this.state;
-const FavouritePage = () => {
+  render() {
+    const { isLoading, favBooksList } = this.state;
+// const FavouritePage = () => {
     return (
       <DefaultLayout>
         <div className={styles.container}>
@@ -67,11 +65,11 @@ const FavouritePage = () => {
           />
           <h1> Вот список книг, на которые вы подписаны:</h1>
           <div className={styles.content}>
-            {/* {isLoading
+            {isLoading
               ? "Loading..."
-              :  */}
-              {favBooks.map((book) => {
-                  // if (book.isFavourite)
+              : 
+              favBooksList.map((book) => {
+                  if (book.isFavourite) {
                     return (
                         <Card
                           hoverable
@@ -84,19 +82,19 @@ const FavouritePage = () => {
                               icon={<StarFilled />}
                               style={{ color: "blue" }}
                               // onClick={() => this.unfavourite(book.id)}
-                              onClick={() => addFav(book.id)}
+                              onClick={() => (addFav(book.id), this.unfavourite(book.id))}
                             />
                           }
                         >
                           <Meta title={book.name} description={book.author} />
                         </Card>
-                    );
+                    );}
                 })}
           </div>
         </div>
       </DefaultLayout>
     );
   }
-// }
+}
 
 export default FavouritePage;
