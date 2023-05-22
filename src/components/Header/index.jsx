@@ -26,11 +26,12 @@ const Header = () => {
   return (
     <Layout.Header className={styles.root}>
       <div className={styles.headerInner}>
-        <div className={styles.headerLeft}>
           <h2>
             <BookOutlined />
             Sharebooks
           </h2>
+        <div className={styles.headerLeft}>
+          
           <Menu
             className={styles.topMenu}
             theme="dark"

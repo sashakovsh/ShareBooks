@@ -37,7 +37,7 @@ const AuthPage = () => {
             <Row>
                 <Col span={10} offset={7}>
                     <h2>Вход выполнен успешно</h2>
-                    <LoadingOutlined style={{ fontSize: 50 }}/>
+                    <LoadingOutlined style={{ fontSize: 50, margin: 100 }}/>
                 </Col>
             </Row>
     
@@ -46,7 +46,7 @@ const AuthPage = () => {
                     name="authForm" 
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 16 }}
-                    style={{ maxWidth: 700, margin: 50 }}
+                    style={{ width: 700, paddingLeft: 155 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}

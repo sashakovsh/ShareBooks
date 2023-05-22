@@ -12,6 +12,9 @@ const RecsPage = () => {
     <>
       <DefaultLayout>
         <>
+          { !recBooks.length ? 
+          <h2 style={{ paddingLeft: 155}}>Для начала, необходимо выбрать хотя бы одну книгу</h2> 
+          :
           <div className={styles.content}>
             {recBooks.map((book) => (
               <Card
@@ -32,6 +35,7 @@ const RecsPage = () => {
               </Card>
             ))}
           </div>
+          }
         </>
       </DefaultLayout>
     </>
