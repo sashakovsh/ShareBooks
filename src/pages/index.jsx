@@ -7,12 +7,14 @@ import FavouritePage from "./FavouritePage";
 import AuthPage from "./AuthPage";
 import LogoutPage from "./Logout";
 import RegistrationPage from "./RegistrationPage";
+import BookPage from "./BookPage";
 
 
 const RouteComponent = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/:id" element={<BookPage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/recommended" element={<RecsPage />} />
       <Route path="/favourite" element={<FavouritePage />} />
