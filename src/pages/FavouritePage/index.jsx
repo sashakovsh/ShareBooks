@@ -6,6 +6,7 @@ import { Card, Button } from "antd";
 import styles from "./index.module.scss";
 import { StarOutlined, StarFilled } from "@ant-design/icons";
 import { books, favBooks, addFav} from "../../api/favBooks";
+import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 // const FAVOURITE_BD_PATH = "https://anapioficeandfire.com/api/books";
@@ -71,23 +72,33 @@ class FavouritePage extends React.Component {
               favBooksList.map((book) => {
                   if (book.isFavourite) {
                     return (
-                        <Card
-                          hoverable
-                          className={styles.card}
-                          style={{ width: 300 }}
-                          key={book.id}
-                          cover={<img alt="example" src={book.img} />}
-                          extra={
-                            <Button
-                              icon={<StarFilled />}
-                              style={{ color: "blue" }}
-                              // onClick={() => this.unfavourite(book.id)}
-                              onClick={() => (addFav(book.id), this.unfavourite(book.id))}
-                            />
-                          }
-                        >
-                          <Meta title={book.name} description={book.author} />
-                        </Card>
+                      <div className={styles.bookBlock} key={book.id}>
+                        <Button
+                          className={styles.favBtn}
+                          icon={<StarFilled />}
+                          style={{ color: "#C44536" }}
+                          onClick={() => (addFav(book.id), this.unfavourite(book.id))}
+                        />
+                        <Link className={styles.link} to={'/' + (book.id)}>
+                          <Card
+                            hoverable
+                            className={styles.card}
+                            style={{ width: 300 }}
+                            // key={book.id}
+                            cover={<img alt="example" src={book.img} />}
+                            // extra={
+                            //   <>
+                            //   <Button
+                            //     icon={<StarFilled />}
+                            //     style={{ color: "#C44536" }}
+                            //     onClick={() => (addFav(book.id), this.unfavourite(book.id))}
+                            //   />
+                            // }
+                          >
+                            <Meta title={book.name} description={book.author} />
+                          </Card>
+                        </Link>
+                      </div>
                     );}
                 })}
           </div>

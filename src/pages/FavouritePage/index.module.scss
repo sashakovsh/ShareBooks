@@ -15,3 +15,20 @@
 h1 {
     padding: 1%;
 }
+
+.bookBlock {
+  position: relative;
+}
+
+.favBtn {
+  position: absolute;
+  z-index: 1;
+  background-color: transparent;
+  border-color: transparent;
+  right: 10px;
+  top: 10px;
+}
+
+.link {
+  text-decoration: none;
+}

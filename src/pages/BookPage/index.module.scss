@@ -1,24 +1,26 @@
 .content {
-display: flex;
+  display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 50px 0;
 }
 
-.card {
-    width: 31.5%;
+h4{
+    padding-bottom: 20px;
 }
 
-:global {
-    .ant-card-cover img {
-        height: 360px;
-    }
+p{
+    text-align: justify;
+}
+
+.bookCover {
+    height: 400px;
 }
 
 .bookBlock {
     position: relative;
 }
-
+  
 .favBtn {
     position: absolute;
     z-index: 1;
@@ -26,8 +28,8 @@ display: flex;
     border-color: transparent;
     right: 10px;
     top: 10px;
-}
-
-.link {
-    text-decoration: none;
   }
+
+.bookDescription {
+    width: 50%;
+}
