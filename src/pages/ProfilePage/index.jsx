@@ -1,16 +1,15 @@
 import React from "react";
 import DefaultLayout from "../../layouts/DefaultLayout";
-import "./index.css";
-
+import "./index.module.scss";
 
 const ProfilePage = () => {
   return (
     <DefaultLayout>
       <div className={"container"}>
         <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-    />
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        />
         <div className="profile-card">
           <div className="avatar-container">
             <img src="./img/default-avatar.png" alt="" />
