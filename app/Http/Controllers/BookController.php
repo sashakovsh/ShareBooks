@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -31,39 +33,42 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+            
+            $validatedData = $request->validate([
+                'img' => 'nullable|image',
+                'name' => 'required|string',
+                'author' => 'required|string',
+                'description' => 'nullable|string',
+            ]);
 
-        $validatedData = $request->validate([
-            'img' => 'required|image',
-            'name' => 'required|string',
-            'author' => 'required|string',
-            'description' => 'nullable|string',
-        ]);
-
-
-        $image = $validatedData['img'];
-
-
-        $extension = $image->getClientOriginalExtension();
-        $filename = Str::uuid() . '.' . $extension;
+            if ($request->hasFile('img')) {
+                $image = $validatedData['img'];
 
 
-        $path = $image->storeAs('public/images', $filename);
+                $extension = $image->getClientOriginalExtension();
+                $filename = Str::uuid() . '.' . $extension;
 
 
-        $imagePath = Storage::url($path);
-        $name = $validatedData['name'];
-        $author = $validatedData['author'];
-        $description = $validatedData['description'];
+                $path = $image->storeAs('/books/images', $filename, 'public');
 
 
-        $model = new Book();
-        $model->img = $imagePath;
-        $model->name = $name;
-        $model->author = $author;
-        $model->description = $description;
-        $model->save();
+                $imagePath = Storage::url($path);
+            } else {
+                $imagePath = null;
+            }
+            $name = $validatedData['name'];
+            $author = $validatedData['author'];
+            $description = $validatedData['description'];
+            
+            
 
-        return response()->json(['message' => 'Image stored successfully']);
+            Book::create([
+                'name' => $name,
+                'author' => $author,
+                'img' => $imagePath,
+                'description' => $description,
+            ]);
+            return response()->json(['message' => 'Image stored successfully']);
     }
 
     /**
@@ -102,11 +107,9 @@ class BookController extends Controller
             return response()->json(['message' => 'Image not found'], 404);
         }
 
-        // Update the model fields
         $model->title = $validatedData['title'];
         $model->description = $validatedData['description'];
 
-        // Save the model changes
         $model->save();
 
         return response()->json(['message' => 'Image updated successfully']);

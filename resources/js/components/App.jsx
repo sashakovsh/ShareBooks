@@ -36,6 +36,12 @@ class App extends Component{
         this.getBookSingle();
     }
 
+    storeBook = () => {
+        axios.post("books.store", {name:"aaa", author:"bbb", description: ""}).then(function (response) {
+            console.log(response)
+        });
+    }
+
     render(){
         return (
             <div className="container">
@@ -48,6 +54,7 @@ class App extends Component{
                         </div>
                     </div>
                 </div>
+                <p onClick={()=>{this.storeBook()}}>store</p>
             </div>
         );
     }
