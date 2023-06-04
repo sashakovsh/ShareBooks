@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Form, Input, Checkbox, Button, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
-
+import ErrorBlock from "../../components/ErrorBlock";
 
 const AuthPage = () => {
     const navigate = useNavigate();
@@ -12,6 +12,7 @@ const AuthPage = () => {
     const [password, setPassword] = useState('');
     const [isAuthenticated, setisAuthenticated] = useState('false');
     const testUser = {email: "example@mail.com", password: "Admin123"};
+    const [isError, setisError] = useState(false)
 
     const onFinish = () => {
         if(email === testUser.email && password === testUser.password) {
@@ -19,7 +20,7 @@ const AuthPage = () => {
             localStorage.setItem("authenticated", true)
             setTimeout(() => navigate("/profile"), 1000)
         } else {
-            alert('Пользователь не найден')
+            setisError(true);
         }
     };
 
@@ -31,7 +32,28 @@ const AuthPage = () => {
         navigate("/registration")
     }
 
+    const handleClick = () => {
+        setisError(false);
+    }
+
+    const handleCancel = () => {
+        setisError(false);
+    }
+
+    // useEffect(() => {
+    //         console.log(isError);
+    // }, [isError]);
+
     return (
+        <>
+        {isError === true ?
+            <ErrorBlock 
+                is_error={isError} 
+                text="Пользователь не найден" 
+                onClick={handleClick} 
+                onCancel={handleCancel}/>
+            : null
+        }
         <DefaultLayout>
             { isAuthenticated === true ?
             <Row>
@@ -110,6 +132,7 @@ const AuthPage = () => {
                 </Form>
         }
         </DefaultLayout>
+        </>
     )
 };
 
