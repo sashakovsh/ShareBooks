@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-const REGISTER_URL = "/registration";
 
 const RegistrationPage = () => {
     const navigate = useNavigate();
@@ -12,28 +11,39 @@ const RegistrationPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [errMsg, setErrMsg] = useState('');
-
     const onFinish = async () => {
-        axios.post(
-            REGISTER_URL, 
-            JSON.stringify({username, email, password}), 
-            { 
-                headers: { "Content-Type": "application/json" }, withCredentials: true
-            }).then(console.log('SUCCSES'))
-              .catch(
-                (err) => {
-                    setErrMsg(err)
-                    console.log(errMsg);
+        await axios.get('http://localhost/api/sanctum/csrf-cookie').
+            then( (resp) => {
+                axios.post('http://localhost/api/register', {
+                    'name': username,
+                    'email': email,
+                    'password': password
+                },
+                {withCredentials: true},
+                {headers: 
+                    {
+                        'X-CSRF-TOKEN': resp.data
+                    }
+                }
+                ).then( resp => {
+                    if(resp.data.status === 'succsess') {
+                        localStorage.authenticated = true
+                    }
                 })
+            }).catch( (err) => console.log(err))
     };
+
     const redirect = () => {
         navigate("/auth");
+    }
+    const redirectToProfile = () => {
+        navigate("/profile")
     }
 
 
     return(
         <DefaultLayout>
+            {localStorage.authenticated ? redirectToProfile() :
             <Form
                     name="registrationForm" 
                     labelCol={{ span: 8 }}
@@ -103,6 +113,7 @@ const RegistrationPage = () => {
                 
                     </Form.Item>
                 </Form>
+            }
         </DefaultLayout>
     )
 };
