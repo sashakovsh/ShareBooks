@@ -6,26 +6,38 @@ import { useNavigate } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import ErrorBlock from "../../components/ErrorBlock";
 
+
 const AuthPage = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isAuthenticated, setisAuthenticated] = useState('false');
     const testUser = {email: "example@mail.com", password: "Admin123"};
-    const [isError, setisError] = useState(false)
+    const [isError, setisError] = useState(false);
+    const [errText, seterrText] = useState('');
 
     const onFinish = () => {
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            setisError(true);
+            seterrText('Некорректный формат электронной почты.');
+            return
+        }
         if(email === testUser.email && password === testUser.password) {
             setisAuthenticated(true);
             localStorage.setItem("authenticated", true)
             setTimeout(() => navigate("/profile"), 1000)
         } else {
             setisError(true);
+            seterrText('Пользователь не найден, проверьте правильность введённых данных.');
         }
     };
 
     const onFinishFailed = () => {
         console.log('Failed');
+        setisError(true);
+        seterrText('Все поля должны быть заполнены.');
+
     }
 
     const redirect = () => {
@@ -49,7 +61,7 @@ const AuthPage = () => {
         {isError === true ?
             <ErrorBlock 
                 is_error={isError} 
-                text="Пользователь не найден" 
+                text={errText} 
                 onClick={handleClick} 
                 onCancel={handleCancel}/>
             : null
