@@ -3,7 +3,9 @@ import axios from "axios";
 import { useState } from "react";
 import { Form, Input, Checkbox, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-// import { LoadingOutlined } from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
+import ErrorBlock from "../../components/ErrorBlock";
+
 
 
 const AuthPage = () => {
@@ -11,8 +13,27 @@ const AuthPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const [isAuthenticated, setisAuthenticated] = useState('false');
+    const [isError, setisError] = useState(false);
+    const [errText, seterrText] = useState('');
 
-    const onFinish = async () => {
+//     const onFinish = () => {
+//         const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+//         if (!emailRegex.test(email)) {
+//             setisError(true);
+//             seterrText('Некорректный формат электронной почты.');
+//             return
+//         }
+//         if(email === testUser.email && password === testUser.password) {
+//             setisAuthenticated(true);
+//             localStorage.setItem("authenticated", true)
+//             setTimeout(() => navigate("/profile"), 1000)
+//         } else {
+//             setisError(true);
+//             seterrText('Пользователь не найден, проверьте правильность введённых данных.');
+//         }
+//     };
+   const onFinish = async () => {
         await axios.get('http://localhost/api/sanctum/csrf-cookie').
             then( (resp) => {
                 axios.post('http://localhost/api/login', {
@@ -29,22 +50,43 @@ const AuthPage = () => {
                         localStorage.authenticated = true;
                         localStorage.userName = resp.data.user.name;
                     } 
-                    if(resp.data.status === false) {
-                        console.log(resp.data)
-                    }
                 })
             })
     } 
 
     const onFinishFailed = () => {
         console.log('Failed');
+        setisError(true);
+        seterrText('Все поля должны быть заполнены.');
+
     }
 
     const redirect = () => {
         navigate("/registration")
     }
-    
+
+    const handleClick = () => {
+        setisError(false);
+    }
+
+    const handleCancel = () => {
+        setisError(false);
+    }
+
+    // useEffect(() => {
+    //         console.log(isError);
+    // }, [isError]);
+
     return (
+        <>
+        {isError === true ?
+            <ErrorBlock 
+                is_error={isError} 
+                text={errText} 
+                onClick={handleClick} 
+                onCancel={handleCancel}/>
+            : null
+        }
         <DefaultLayout>
          
             <Form
@@ -115,6 +157,7 @@ const AuthPage = () => {
                 </Form>
                 
         </DefaultLayout>
+        </>
     )
 };
 
