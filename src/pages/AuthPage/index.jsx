@@ -1,37 +1,58 @@
 import DefaultLayout from "../../layouts/DefaultLayout";
-// import axios from "axios";
+import axios from "axios";
 import { useState } from "react";
-import { Form, Input, Checkbox, Button, Row, Col } from "antd";
+import { Form, Input, Checkbox, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import ErrorBlock from "../../components/ErrorBlock";
+
 
 
 const AuthPage = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
     const [isAuthenticated, setisAuthenticated] = useState('false');
-    const testUser = {email: "example@mail.com", password: "Admin123"};
     const [isError, setisError] = useState(false);
     const [errText, seterrText] = useState('');
 
-    const onFinish = () => {
-        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
-        if (!emailRegex.test(email)) {
-            setisError(true);
-            seterrText('Некорректный формат электронной почты.');
-            return
-        }
-        if(email === testUser.email && password === testUser.password) {
-            setisAuthenticated(true);
-            localStorage.setItem("authenticated", true)
-            setTimeout(() => navigate("/profile"), 1000)
-        } else {
-            setisError(true);
-            seterrText('Пользователь не найден, проверьте правильность введённых данных.');
-        }
-    };
+//     const onFinish = () => {
+//         const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+//         if (!emailRegex.test(email)) {
+//             setisError(true);
+//             seterrText('Некорректный формат электронной почты.');
+//             return
+//         }
+//         if(email === testUser.email && password === testUser.password) {
+//             setisAuthenticated(true);
+//             localStorage.setItem("authenticated", true)
+//             setTimeout(() => navigate("/profile"), 1000)
+//         } else {
+//             setisError(true);
+//             seterrText('Пользователь не найден, проверьте правильность введённых данных.');
+//         }
+//     };
+   const onFinish = async () => {
+        await axios.get('http://localhost/api/sanctum/csrf-cookie').
+            then( (resp) => {
+                axios.post('http://localhost/api/login', {
+                    'email': email,
+                    'password': password
+                },
+                {withCredentials: true},
+                {headers: {
+                    'X-CSRF-TOKEN': resp.data
+                }}
+                )
+                .then( (resp) => {
+                    if(resp.data.status === true) {
+                        localStorage.authenticated = true;
+                        localStorage.userName = resp.data.user.name;
+                    } 
+                })
+            })
+    } 
 
     const onFinishFailed = () => {
         console.log('Failed');
@@ -67,15 +88,7 @@ const AuthPage = () => {
             : null
         }
         <DefaultLayout>
-            { isAuthenticated === true ?
-            <Row>
-                <Col span={10} offset={7}>
-                    <h2>Вход выполнен успешно</h2>
-                    <LoadingOutlined style={{ fontSize: 50, margin: 100 }}/>
-                </Col>
-            </Row>
-    
-            : 
+         
             <Form
                     name="authForm" 
                     labelCol={{ span: 8 }}
@@ -142,7 +155,7 @@ const AuthPage = () => {
                         </Button>
                     </Form.Item>
                 </Form>
-        }
+                
         </DefaultLayout>
         </>
     )

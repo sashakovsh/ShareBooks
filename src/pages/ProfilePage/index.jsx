@@ -3,6 +3,8 @@ import DefaultLayout from "../../layouts/DefaultLayout";
 import "./index.module.scss";
 
 const ProfilePage = () => {
+  const name = localStorage.userName;
+
   return (
     <DefaultLayout>
       <div className={"container"}>
@@ -18,7 +20,7 @@ const ProfilePage = () => {
             <div className="about-container">
               <div className="table-row">
                 <div className="card-item-first">Имя:</div>
-                <div className="card-item-second">Admin</div>
+                <div className="card-item-second">{name}</div>
               </div>
               <div className="table-row">
                 <div className="card-item-first">E-mail:</div>
