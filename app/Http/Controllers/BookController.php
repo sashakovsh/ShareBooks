@@ -90,7 +90,7 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
 
         $validatedData = $request->validate([
@@ -101,7 +101,7 @@ class BookController extends Controller
         ]);
 
 
-        $model = Book::find($id);
+        $model = Book::find($request->id);
 
         if (!$model) {
             return response()->json(['message' => 'Image not found'], 404);
@@ -120,7 +120,13 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        try {
+            $book->delete();
+            return response()->json('ok');
+        } catch (Exception $exception) {
+            Log::error($exception->getMessage(), $exception->getTrace());
+            return response()->json('error', '400');
+        }
     }
 
 

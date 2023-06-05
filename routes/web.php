@@ -26,11 +26,10 @@ Route::get('/get/book/list', [BookController::class, 'getBookList']);
 Route::post('/get/book/single', [BookController::class, 'getBookSingle']);
 
 
-//Route::get('books.index', [BookController::class, 'index']);
 Route::post('books.store', [BookController::class, 'store']);
+Route::post('books.update', [BookController::class, 'update']);
+Route::post('books.destroy', [BookController::class, 'destroy']);
 
-
-//Route::resource('/books', BookController::class);
 
 
 Route::get('/token', function () {
