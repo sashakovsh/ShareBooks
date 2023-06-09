@@ -2,6 +2,7 @@ import DefaultLayout from "../../layouts/DefaultLayout";
 import { Form, Input, Button } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ErrorBlock from "../../components/ErrorBlock";
 import axios from "axios";
 
 
@@ -10,10 +11,19 @@ const RegistrationPage = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isError, setisError] = useState(false);
+    const [errText, seterrText] = useState('');
 
     const onFinish = async () => {
-        await axios.get('http://localhost/api/sanctum/csrf-cookie').
-            then( (resp) => {
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            setisError(true);
+            seterrText('Некорректный формат электронной почты.');
+            return
+        }
+        await axios.get('http://localhost/api/sanctum/csrf-cookie')
+            .then( (resp) => {
+                console.log(resp);
                 axios.post('http://localhost/api/register', {
                     'name': username,
                     'email': email,
@@ -26,11 +36,18 @@ const RegistrationPage = () => {
                     }
                 }
                 ).then( resp => {
-                    if(resp.data.status === 'succsess') {
+                    if(resp.data.status === 'success') {
                         localStorage.authenticated = true
                     }
                 })
-            }).catch( (err) => console.log(err))
+                .catch( (err) => {
+                    setisError(true);
+                    seterrText(err.message)
+                })
+            }).catch( (err) => {
+                setisError(true);
+                seterrText(err.message)
+            })
     };
 
     const redirect = () => {
@@ -40,8 +57,31 @@ const RegistrationPage = () => {
         navigate("/profile")
     }
 
+    const onFinishFailed = () => {
+        console.log('Failed');
+        setisError(true);
+        seterrText('Все поля должны быть заполнены.');
+
+    }
+
+    const handleClick = () => {
+        setisError(false);
+    }
+
+    const handleCancel = () => {
+        setisError(false);
+    }
 
     return(
+        <>
+        {isError === true ?
+            <ErrorBlock 
+                is_error={isError} 
+                text={errText} 
+                onClick={handleClick} 
+                onCancel={handleCancel}/>
+            : null
+        }
         <DefaultLayout>
             {localStorage.authenticated ? redirectToProfile() :
             <Form
@@ -50,6 +90,7 @@ const RegistrationPage = () => {
                     style={{ width: 700, paddingLeft: 155}}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
                     autoComplete="off"
                     >
                     <Form.Item
@@ -115,6 +156,7 @@ const RegistrationPage = () => {
                 </Form>
             }
         </DefaultLayout>
+        </>
     )
 };
 

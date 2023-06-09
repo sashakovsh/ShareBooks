@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Form, Input, Checkbox, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { LoadingOutlined } from "@ant-design/icons";
+// import { LoadingOutlined } from "@ant-design/icons";
 import ErrorBlock from "../../components/ErrorBlock";
 
 
@@ -12,8 +12,8 @@ const AuthPage = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMsg, setErrorMsg] = useState('');
-    const [isAuthenticated, setisAuthenticated] = useState('false');
+    // const [errorMsg, setErrorMsg] = useState('');
+    // const [isAuthenticated, setisAuthenticated] = useState('false');
     const [isError, setisError] = useState(false);
     const [errText, seterrText] = useState('');
 
@@ -34,6 +34,12 @@ const AuthPage = () => {
 //         }
 //     };
    const onFinish = async () => {
+        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            setisError(true);
+            seterrText('Некорректный формат электронной почты.');
+            return
+        }
         await axios.get('http://localhost/api/sanctum/csrf-cookie').
             then( (resp) => {
                 axios.post('http://localhost/api/login', {
@@ -51,6 +57,13 @@ const AuthPage = () => {
                         localStorage.userName = resp.data.user.name;
                     } 
                 })
+                .catch( (err) => {
+                    setisError(true);
+                    seterrText(err.message)
+                })
+            }).catch( (err) => {
+                setisError(true);
+                seterrText(err.message)
             })
     } 
 
@@ -72,10 +85,6 @@ const AuthPage = () => {
     const handleCancel = () => {
         setisError(false);
     }
-
-    // useEffect(() => {
-    //         console.log(isError);
-    // }, [isError]);
 
     return (
         <>
