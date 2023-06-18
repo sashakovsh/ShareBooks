@@ -1,163 +1,111 @@
+import { Form, Input, Button, notification } from "antd";
+import { useNavigate } from "react-router-dom";
+import { getToken, register } from "../../api";
 import DefaultLayout from "../../layouts/DefaultLayout";
-import { Form, Input, Button } from 'antd';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ErrorBlock from "../../components/ErrorBlock";
-import axios from "axios";
-
 
 const RegistrationPage = () => {
-    const navigate = useNavigate();
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [isError, setisError] = useState(false);
-    const [errText, seterrText] = useState('');
+  const navigate = useNavigate();
 
-    const onFinish = async () => {
-        const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
-        if (!emailRegex.test(email)) {
-            setisError(true);
-            seterrText('Некорректный формат электронной почты.');
-            return
-        }
-        await axios.get('http://localhost/api/sanctum/csrf-cookie')
-            .then( (resp) => {
-                console.log(resp);
-                axios.post('http://localhost/api/register', {
-                    'name': username,
-                    'email': email,
-                    'password': password
+  const onSubmit = async (values) => {
+    try {
+      await getToken().then(async (token) => {
+        console.log(token);
+        await register(values, token);
+      });
+
+      notification.success({
+        message: "Успешно!",
+        description: "Переходим на главную",
+        duration: 2,
+      });
+
+      localStorage.authenticated = true;
+
+      navigate("/");
+    } catch (err) {
+      console.warn("RegistrationForm", err.message);
+
+      notification.error({
+        message: "Ошибка!",
+        description: "Проверьте данные",
+        duration: 2,
+      });
+    }
+  };
+
+  const redirect = () => {
+    navigate("/auth");
+  };
+  const redirectToProfile = () => {
+    navigate("/profile");
+  };
+
+  return (
+    <>
+      <DefaultLayout>
+        {localStorage.authenticated ? (
+          redirectToProfile()
+        ) : (
+          <Form
+            name="register"
+            labelCol={{ span: 8 }}
+            style={{ width: 700, paddingLeft: 155 }}
+            initialValues={{ remember: true }}
+            onFinish={onSubmit}
+          >
+            <Form.Item
+              label="Введите вашe имя"
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: "Пожалуйста, введите ваше имя",
                 },
-                {withCredentials: true},
-                {headers: 
-                    {
-                        'X-CSRF-TOKEN': resp.data
-                    }
-                }
-                ).then( resp => {
-                    if(resp.data.status === 'success') {
-                        localStorage.authenticated = true
-                    }
-                })
-                .catch( (err) => {
-                    setisError(true);
-                    seterrText(err.message)
-                })
-            }).catch( (err) => {
-                setisError(true);
-                seterrText(err.message)
-            })
-    };
+              ]}
+            >
+              <Input placeholder="Введите имя" />
+            </Form.Item>
 
-    const redirect = () => {
-        navigate("/auth");
-    }
-    const redirectToProfile = () => {
-        navigate("/profile")
-    }
+            <Form.Item
+              label="Введите вашу почту"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Пожалуйста, введите ваш email",
+                  pattern: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/,
+                },
+              ]}
+            >
+              <Input placeholder="Введите email" />
+            </Form.Item>
 
-    const onFinishFailed = () => {
-        console.log('Failed');
-        setisError(true);
-        seterrText('Все поля должны быть заполнены.');
+            <Form.Item
+              label="Пароль"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Пожалуйста, введите ваш пароль",
+                },
+              ]}
+            >
+              <Input.Password placeholder="Введите пароль" />
+            </Form.Item>
 
-    }
-
-    const handleClick = () => {
-        setisError(false);
-    }
-
-    const handleCancel = () => {
-        setisError(false);
-    }
-
-    return(
-        <>
-        {isError === true ?
-            <ErrorBlock 
-                is_error={isError} 
-                text={errText} 
-                onClick={handleClick} 
-                onCancel={handleCancel}/>
-            : null
-        }
-        <DefaultLayout>
-            {localStorage.authenticated ? redirectToProfile() :
-            <Form
-                    name="registrationForm" 
-                    labelCol={{ span: 8 }}
-                    style={{ width: 700, paddingLeft: 155}}
-                    initialValues={{ remember: true }}
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="off"
-                    >
-                    <Form.Item
-                        label="Введите вашe имя"
-                        name="username"
-                        rules={[
-                        {
-                            required: true,
-                            message: 'Пожалуйста, введите ваше имя',
-                        },
-                        ]}
-                    >
-                        <Input 
-                            value={username} 
-                            placeholder="Введите имя"
-                            onChange={ (e) => setUsername(e.target.value)}
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Введите вашу почту"
-                        name="email"
-                        rules={[
-                        {
-                            required: true,
-                            message: 'Пожалуйста, введите ваш email',
-                        },
-                        ]}
-                    >
-                        <Input 
-                            value={email} 
-                            placeholder="Введите email"
-                            onChange={ (e) => setEmail(e.target.value) }
-                        />
-                    </Form.Item>
-                    
-                    <Form.Item
-                        label="Пароль"
-                        name="password"
-                        rules={[
-                        {
-                            required: true,
-                            message: 'Пожалуйста, введите ваш пароль',
-                        },
-                        ]}
-                    >
-                        <Input.Password 
-                            value={password} 
-                            placeholder="Введите пароль"
-                            onChange={ (e) => setPassword(e.target.value) }
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        wrapperCol={{ offset: 8, span: 16 }}
-                    >
-                        <Button type="primary" htmlType="submit">
-                            Зарегистрироваться
-                        </Button>
-                        <Button type="link" onClick={redirect}>Назад</Button>
-                
-                    </Form.Item>
-                </Form>
-            }
-        </DefaultLayout>
-        </>
-    )
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button type="primary" htmlType="submit">
+                Зарегистрироваться
+              </Button>
+              <Button type="link" onClick={redirect}>
+                Назад
+              </Button>
+            </Form.Item>
+          </Form>
+        )}
+      </DefaultLayout>
+    </>
+  );
 };
 
 export default RegistrationPage;
