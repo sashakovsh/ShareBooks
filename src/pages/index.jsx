@@ -1,26 +1,39 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./HomePage";
+import CatalogPage from "./CatalogPage";
 import ProfilePage from "./ProfilePage";
-import RecsPage from "./RecsPage"
-import FavouritePage from "./FavouritePage";
+import RecsSeparatePage from "./RecsSeparatePage"
+import FavouriteSeparatePage from "./FavouriteSeparatePage";
 import AuthPage from "./AuthPage";
 import LogoutPage from "./Logout";
 import RegistrationPage from "./RegistrationPage";
 import BookPage from "./BookPage";
+import MainPage from "./MainPage";
+import AboutPage from "./AboutPage";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 
 const RouteComponent = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/main" element={<MainPage />} />
+      <Route path="/catalog" element={<CatalogPage />} />
       <Route path="/:id" element={<BookPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/recommended" element={<RecsPage />} />
-      <Route path="/favourite" element={<FavouritePage />} />
+      <Route path="/profile" element={
+        <ProtectedRoute auth={localStorage.authenticated}>
+          <ProfilePage />
+        </ProtectedRoute>} />
+      <Route path="/recommended" element={
+        <ProtectedRoute auth={localStorage.authenticated}>
+          <RecsSeparatePage />
+        </ProtectedRoute>} />
+      <Route path="/favourite" element={
+        <ProtectedRoute auth={localStorage.authenticated}>
+          <FavouriteSeparatePage />
+        </ProtectedRoute>} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/logout" element={<LogoutPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
+      <Route path="/about" element={<AboutPage />} />
     </Routes>
   );
 };

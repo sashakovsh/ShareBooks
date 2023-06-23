@@ -22,7 +22,7 @@ const AuthPage = () => {
         duration: 2,
       });
 
-      navigate("/");
+      navigate("/main");
     } catch (err) {
       console.warn("LoginForm", err.message);
 

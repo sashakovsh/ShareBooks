@@ -1,4 +1,3 @@
-import React from "react";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import { Card, Button } from "antd";
 import { StarOutlined } from "@ant-design/icons";
@@ -32,7 +31,7 @@ const { Meta } = Card;
   // },
 // ];
 
-const HomePage = () => {
+const CatalogPage = () => {
   return (
     <>
       <DefaultLayout>
@@ -74,4 +73,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default CatalogPage;

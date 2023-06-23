@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC&display=swap');
+
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
-  font-family: "Segoe UI";
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  height: 100vh;
+  font-family: 'Alegreya Sans SC', sans-serif;
+  background-color: #EDDDD4;
+  color: #283D3B;
 }
 
 #root {

@@ -12,7 +12,7 @@ const BookPage = () => {
   return (
     <>
       <DefaultLayout>
-        <>
+        <div className={styles.wrapper}>
           <div className={styles.content}>
             <div className={styles.bookBlock}>
             <img className={styles.bookCover} src={book.img}></img>
@@ -44,7 +44,7 @@ const BookPage = () => {
                 </p>
             </div>
           </div>
-        </>
+        </div>
       </DefaultLayout>
     </>
   );
