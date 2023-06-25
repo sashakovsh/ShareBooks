@@ -10,7 +10,7 @@ const LogoutPage = () => {
 
   useEffect(() => {
     localStorage.removeItem("authenticated");
-    setTimeout(() => navigate("/"), 1000);
+    setTimeout(() => navigate("/main"), 1000);
   });
 
   return (

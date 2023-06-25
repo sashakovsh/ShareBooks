@@ -1,7 +1,4 @@
-import React from "react";
-import DefaultLayout from "../../layouts/DefaultLayout";
-import { Card, Button } from "antd";
-import { StarOutlined, StarFilled } from "@ant-design/icons";
+import { Card } from "antd";
 import styles from "./index.module.scss";
 import { recBooks, addFav } from "../../api/favBooks";
 import { Link } from "react-router-dom";
@@ -10,9 +7,7 @@ const { Meta } = Card;
 
 const RecsPage = () => {
   return (
-    <>
-      <DefaultLayout>
-        <>
+        <div className={styles.wrapper}>
           {!recBooks.length ? (
             <h2 style={{ paddingLeft: 155 }}>
               Для начала, необходимо выбрать хотя бы одну книгу
@@ -49,9 +44,7 @@ const RecsPage = () => {
               ))}
             </div>
           )}
-        </>
-      </DefaultLayout>
-    </>
+        </div>
   );
 };
 

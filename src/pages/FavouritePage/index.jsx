@@ -13,7 +13,7 @@ const FavouritePage = () => {
   const [favBooksList, setFavBooksList] = useState(favBooks);
 
   return (
-    <DefaultLayout>
+    <div className={styles.wrapper}>
       <div className={styles.container}>
         <h1> Вот список книг, на которые вы подписаны:</h1>
         <div className={styles.content}>
@@ -52,7 +52,7 @@ const FavouritePage = () => {
           })}
         </div>
       </div>
-    </DefaultLayout>
+    </div>
   );
 };
 

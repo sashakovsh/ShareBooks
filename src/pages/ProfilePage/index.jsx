@@ -1,12 +1,36 @@
-import React from "react";
 import DefaultLayout from "../../layouts/DefaultLayout";
-import "./index.module.scss";
+import styles from "./index.module.scss";
+import RecsPage from "../RecsPage";
+import FavouritePage from "../FavouritePage";
 
 const ProfilePage = () => {
   const name = localStorage.userName;
 
+  const showFavs = () => {
+    const favs = document.getElementById('favs');
+    const recs = document.getElementById('recs');
+    if(recs.classList.contains(styles.hidden)) {
+      favs.classList.toggle(styles.hidden);
+    } else {
+      recs.classList.toggle(styles.hidden);
+      favs.classList.toggle(styles.hidden);
+    }
+  }
+
+  const showRecs = () => {
+    const favs = document.getElementById('favs');
+    const recs = document.getElementById('recs');
+    if(favs.classList.contains(styles.hidden)) {
+      recs.classList.toggle(styles.hidden);
+    } else {
+      favs.classList.toggle(styles.hidden);
+      recs.classList.toggle(styles.hidden);
+    }
+  }
+
   return (
     <DefaultLayout>
+      <div className={styles.wrapper}>
       <div className={"container"}>
         <link
           rel="stylesheet"
@@ -14,7 +38,7 @@ const ProfilePage = () => {
         />
         <div className="profile-card">
           <div className="avatar-container">
-            <img src="./img/default-avatar.png" alt="" />
+            <img src="./profile_img/avatar_default.svg" alt="" />
           </div>
           <div className="profile-info-container">
             <div className="about-container">
@@ -62,7 +86,18 @@ const ProfilePage = () => {
               </div>
             </div>
           </div>
+          <div className={styles.btnBlock}>
+            <button onClick={() => showFavs()}>Посмотреть избранное</button>
+            <button onClick={() => showRecs()}>Посмотреть рекомендации</button>
+          </div>
+          <div id='favs' className={`${styles.favs} ${styles.hidden}`}>
+            <FavouritePage/>
+          </div>
+          <div id='recs' className={`${styles.recs} ${styles.hidden}`}>
+            <RecsPage/>
+          </div>
         </div>
+      </div>
       </div>
     </DefaultLayout>
   );

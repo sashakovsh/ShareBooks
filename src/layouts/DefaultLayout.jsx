@@ -7,17 +7,9 @@ import { ConfigProvider } from "antd";
 const DefaultLayout = ({ children }) => {
   return (
     <>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: "#283D3B",
-          }
-        }}
-      >
         <Header />
         {children}
         <Footer />
-      </ConfigProvider>
     </>
   );
 };
