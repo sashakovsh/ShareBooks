@@ -13,6 +13,10 @@ const MainPage = () => {
     }
   };
 
+  const redirectToCatalog = () => {
+    navigate("/catalog");
+  }
+
   return (
       <DefaultLayout>
         <>
@@ -39,8 +43,8 @@ const MainPage = () => {
                     }
                 </button>
                 <button 
-                  className={`${styles.content_button} ${styles["button--catalog"]}`}>
-                  {/* onclick={}> */}                    
+                  className={`${styles.content_button} ${styles["button--catalog"]}`}
+                  onClick={redirectToCatalog}>                  
                     Каталог
                 </button>
               </div>
