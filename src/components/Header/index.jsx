@@ -1,82 +1,84 @@
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styles from "./index.module.scss";
 import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   // const location = useLocation();
   const navigate = useNavigate();
-  const isAuth = () => {
-    if (localStorage.authenticated) {
-      return {
-        key: "/logout",
-        show: true
-      }
-    } else {
-        return {
-          key: "/auth",
-          show: false
-        }
-    }
-  };
+  const { isAuth } = useSelector((state) => state.auth);
+  console.log("isAuth", isAuth);
+  // const isAuth = () => {
+  //   if (localStorage.authenticated) {
+  //     return {
+  //       key: "/logout",
+  //       show: true,
+  //     };
+  //   } else {
+  //     return {
+  //       key: "/auth",
+  //       show: false,
+  //     };
+  //   }
+  // };
 
   const redirect = () => {
-    navigate(isAuth().key);
+    navigate(isAuth ? "/logout" : "/auth");
   };
 
   return (
     <div className={styles.top}>
       <header className={`${styles.header} ${styles.container}`}>
-          <nav className={styles.nav}>
-              <div className={styles.logo}>
-              <Link to={'/main'}>ShareBooks</Link>
-              </div>
-              <div className={styles.nav_menu}>
-                  <div>
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive ? styles.active : null
-                      }
-                      to={'/main'}>
-                        Главная
-                    </NavLink>
-                  </div>
-                  <div>
-                    <NavLink 
-                      className={({ isActive }) =>
-                        isActive ? styles.active : null
-                      }
-                      to={'/about'}>
-                      О проекте
-                    </NavLink>
-                  </div>
-                  <div>
-                    <NavLink 
-                      className={({ isActive }) =>
-                        isActive ? styles.active : null
-                      }
-                      to={'/catalog'}>
-                      Каталог
-                    </NavLink>
-                  </div>
-                  <div>
-                    {isAuth().show 
-                      ?<NavLink 
-                      className={({ isActive }) =>
-                        isActive ? styles.active : null
-                      }
-                      to={'/profile'}>
-                        Профиль
-                      </NavLink>
-                      : null}
-                  </div>
-              </div>
-              <button 
-                id="mainEntry" 
-                className={styles.MainEntryButton}
-                onClick={redirect}>
-                  {isAuth().show ? 'Выход' : 'Вход'}
-              </button>
-          </nav>
+        <nav className={styles.nav}>
+          <div className={styles.logo}>
+            <Link to={"/main"}>ShareBooks</Link>
+          </div>
+          <div className={styles.nav_menu}>
+            <div>
+              <NavLink
+                className={({ isActive }) => (isActive ? styles.active : null)}
+                to={"/main"}
+              >
+                Главная
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                className={({ isActive }) => (isActive ? styles.active : null)}
+                to={"/about"}
+              >
+                О проекте
+              </NavLink>
+            </div>
+            <div>
+              <NavLink
+                className={({ isActive }) => (isActive ? styles.active : null)}
+                to={"/catalog"}
+              >
+                Каталог
+              </NavLink>
+            </div>
+            <div>
+              {isAuth ? (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? styles.active : null
+                  }
+                  to={"/profile"}
+                >
+                  Профиль
+                </NavLink>
+              ) : null}
+            </div>
+          </div>
+          <button
+            id="mainEntry"
+            className={styles.MainEntryButton}
+            onClick={redirect}
+          >
+            {isAuth ? "Выход" : "Вход"}
+          </button>
+        </nav>
       </header>
     </div>
     // <Layout.Header className={styles.root}>
@@ -86,7 +88,7 @@ const Header = () => {
     //         Sharebooks
     //       </h2>
     //     <div className={styles.headerLeft}>
-          
+
     //       <Menu
     //         className={styles.topMenu}
     //         theme="dark"
