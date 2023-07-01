@@ -1,15 +1,9 @@
 import DefaultLayout from "../../layouts/DefaultLayout";
-import { Card, Button } from "antd";
-import { StarOutlined } from "@ant-design/icons";
-// import { getAll } from "../../api/books";
 import styles from "./index.module.scss";
 import { books, addFav } from "../../api/favBooks";
-import { Link } from "react-router-dom";
-
-const { Meta } = Card;
-
-// const books = await getAll();
-
+import { booksList } from "../../api/books";
+import BookCard from "../../components/Books";
+import { useState } from "react";
 // const books = [
   // {
   //   id: 1,
@@ -32,44 +26,91 @@ const { Meta } = Card;
 // ];
 
 const CatalogPage = () => {
+
+  const [startItem, setStartItem] = useState(0);
+  const [itemPerPage, setItemPerPage] = useState(12);
+
+  const moreBooks = () => {
+    if(booksList.length < itemPerPage) {
+      return;
+    } 
+    if(itemPerPage <= (booksList.length - 12)) {
+    setItemPerPage(itemPerPage + 12);
+    } else {
+      setItemPerPage(itemPerPage + (booksList.length - itemPerPage));
+    }
+    console.log(itemPerPage);
+  }
+  
   return (
-    <>
-      <DefaultLayout>
-        <>
-          <div className={styles.content}>
-            {books.map((book) => (
-              <div className={styles.bookBlock} key={book.id}>
-                <Button
-                  className={styles.favBtn}
-                  icon={<StarOutlined />}
-                  style={{ color: "#C44536" }}
-                  onClick={() => addFav(book.id)}
-                />
-                <Link className={styles.link} to={'/' + (book.id)}>
-                <Card
-                  hoverable
-                  className={styles.card}
-                  style={{ width: 300 }}
-                  key={book.id}
-                  cover={<img alt="example" src={book.img} />}
-                  // extra={
-                  //   <>
-                  //   <Button
-                  //     icon={<StarOutlined />}
-                  //     style={{ color: "#C44536" }}
-                  //     onClick={() => addFav(book.id)}
-                  //   />
-                  // }
-                >
-                  <Meta title={book.name} description={book.author} />
-                </Card>
-                </Link>
+    <DefaultLayout>
+      <>
+      <div className={styles.wrapper}>
+        <div className={styles['menu_box--color']}>
+          <div className={`${styles.menu_box} ${styles.container}`}>
+            <menu className={styles.menu}>
+              <div className={`${styles.menu__item} ${styles['menu__item--has-dropdown']}`}>
+                <details>
+                  <summary className={styles.menu__items}>Жанры</summary>
+                  <div className={styles['dropdown-menu']}>
+                    <div href="#" className={styles['dropdown-menu__item']}>
+                      {/* onclick={}> */}
+                      Фантастика
+                    </div>
+                  </div>
+                </details>
+              </div>
+              <div className={`${styles.menu__item} ${styles['menu__item--has-dropdown']}`}>
+                <details>
+                  <summary className={styles.menu__items}>Авторы</summary>
+                  <div className={styles['dropdown-menu']}>
+                    {booksList.map((book) => ( //or books instead of booksList (if mapping from mockapi)
+                      <div href="#" key={book.id} className={styles['dropdown-menu__item']}>
+                        {/* onclick={}> */}
+                        {book.author}
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              </div>
+            </menu>
+
+            <div className={styles.search}>
+              <form className={styles.search_form}>
+                <input className={styles.search_input} type="text" placeholder="Введите запрос"/>
+                <button className={styles.search_button} type="submit">
+                  <img src="/catalog_img/Search.svg" alt=""/>
+                </button>
+              </form>
             </div>
+          </div>
+        </div>
+        <div className={`${styles.content} ${styles.container}`}>
+          <div className={styles.catalog_box}>
+            {booksList.slice(startItem,itemPerPage).map((book) => ( //or books instead of booksList (if mapping from mockapi) + without .slice()
+              <div className={styles.catalog_item} key={book.id}>
+                <BookCard book={book}></BookCard>
+              </div>
             ))}
           </div>
-        </>
-      </DefaultLayout>
-    </>
+          {/* button for api books */}
+          <div className={styles.load_button}>
+            <button onClick={moreBooks}>
+              <span>Ещё книги...</span>
+            </button>
+          </div>
+          <div className={styles.bg_block}>
+              <img 
+                className={styles.bg_block_img} 
+                src={localStorage.authenticated
+                      ? "./main_img/castle.svg"
+                      : "./main_img/planet.svg"} 
+                alt="ShareBooks"/>
+            </div>
+        </div>
+      </div>
+      </>
+    </DefaultLayout>
   );
 };
 

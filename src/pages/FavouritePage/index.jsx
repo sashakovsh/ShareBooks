@@ -18,7 +18,7 @@ const FavouritePage = () => {
         <h1> Вот список книг, на которые вы подписаны:</h1>
         <div className={styles.content}>
           {favBooksList.map((book) => {
-            if (book.isFavourite) {
+            // if (book.isFavourite) {
               return (
                 <div className={styles.bookBlock} key={book.id}>
                   <Button
@@ -48,7 +48,7 @@ const FavouritePage = () => {
                   </Link>
                 </div>
               );
-            }
+            // }
           })}
         </div>
       </div>

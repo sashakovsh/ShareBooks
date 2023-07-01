@@ -1,41 +1,41 @@
 .content {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 50px 0;
-}
-
-.wrapper {
-    min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-  }  
-
-h4{
-    padding-bottom: 20px;
-}
-
-p{
-    text-align: justify;
-}
-
-.bookCover {
-    height: 400px;
-}
-
-.bookBlock {
-    position: relative;
-}
-  
-.favBtn {
-    position: absolute;
-    z-index: 1;
-    background-color: transparent;
-    border-color: transparent;
-    right: 10px;
-    top: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 50px 0;
   }
-
-.bookDescription {
-    width: 50%;
-}
+  
+  .wrapper {
+      min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }  
+  
+  h4{
+      padding-bottom: 20px;
+  }
+  
+  // p{
+  //     text-align: justify;
+  // }
+  
+  .bookCover {
+      height: 400px;
+  }
+  
+  .bookBlock {
+      position: relative;
+  }
+    
+  .favBtn {
+      position: absolute;
+      z-index: 1;
+      background-color: transparent;
+      border-color: transparent;
+      right: 10px;
+      top: 10px;
+    }
+  
+  .bookDescription {
+      width: 50%;
+  }

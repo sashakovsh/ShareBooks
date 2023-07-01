@@ -31,13 +31,13 @@ const Header = () => {
       <header className={`${styles.header} ${styles.container}`}>
         <nav className={styles.nav}>
           <div className={styles.logo}>
-            <Link to={"/main"}>ShareBooks</Link>
+            <Link to={"/"}>ShareBooks</Link>
           </div>
           <div className={styles.nav_menu}>
             <div>
               <NavLink
                 className={({ isActive }) => (isActive ? styles.active : null)}
-                to={"/main"}
+                to={"/"}
               >
                 Главная
               </NavLink>
@@ -58,8 +58,9 @@ const Header = () => {
                 Каталог
               </NavLink>
             </div>
-            <div>
+            {/* <div> */}
               {isAuth ? (
+                <div>
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? styles.active : null
@@ -68,8 +69,9 @@ const Header = () => {
                 >
                   Профиль
                 </NavLink>
+                </div>
               ) : null}
-            </div>
+            {/* </div> */}
           </div>
           <button
             id="mainEntry"

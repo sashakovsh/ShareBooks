@@ -30,20 +30,21 @@ a {
 
 .wrapper {
     min-height: 100vh;
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
-	max-width: $containerWidth;
-	padding: 10px 10px;
-	width: 100%;
-	margin: 0 auto;
+    max-width: $containerWidth;
+    padding: 10px 10px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .content {
     display: flex;
     justify-content: center;
+    margin-top: 130px;
     & h1 {
         font-size: 64px;
         line-height: 110%;
