@@ -1,14 +1,13 @@
 import { Navigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-const ProtectedRoute = ({ auth, children }) => {
+const ProtectedRoute = ({ children }) => {
     
     ProtectedRoute.propTypes = {
-        auth: PropTypes.bool,
         children: PropTypes.element,
       }
 
-    if (!auth) {
+    if (!localStorage.authenticated) {
       return <Navigate to="/auth" replace />;
     }
     return children;

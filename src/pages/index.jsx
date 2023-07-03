@@ -15,19 +15,19 @@ import ProtectedRoute from "../components/ProtectedRoute";
 const RouteComponent = () => {
   return (
     <Routes>
-      <Route path="/main" element={<MainPage />} />
+      <Route path="/" element={<MainPage />} />
       <Route path="/catalog" element={<CatalogPage />} />
       <Route path="/:id" element={<BookPage />} />
       <Route path="/profile" element={
-        <ProtectedRoute auth={localStorage.authenticated}>
+        <ProtectedRoute>
           <ProfilePage />
         </ProtectedRoute>} />
       <Route path="/recommended" element={
-        <ProtectedRoute auth={localStorage.authenticated}>
+        <ProtectedRoute>
           <RecsSeparatePage />
         </ProtectedRoute>} />
       <Route path="/favourite" element={
-        <ProtectedRoute auth={localStorage.authenticated}>
+        <ProtectedRoute>
           <FavouriteSeparatePage />
         </ProtectedRoute>} />
       <Route path="/auth" element={<AuthPage />} />

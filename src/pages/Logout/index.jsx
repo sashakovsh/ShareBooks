@@ -3,14 +3,20 @@ import DefaultLayout from "../../layouts/DefaultLayout";
 import { Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { setAuth } from "../../redux/auth";
+import { useDispatch } from "react-redux";
 
 const LogoutPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   console.log(localStorage.authenticated);
 
   useEffect(() => {
+    dispatch(setAuth(false));
     localStorage.removeItem("authenticated");
-    setTimeout(() => navigate("/main"), 1000);
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
+    setTimeout(() => navigate("/"), 1000);
   });
 
   return (

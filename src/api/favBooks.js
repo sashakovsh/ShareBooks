@@ -1,4 +1,5 @@
 import { getAll } from "./books";
+import { booksList } from "./books";
 import users from "./users";
 
 export const books = await getAll();
@@ -24,13 +25,13 @@ function showRecs(id) {
 }
 
 export function addFav(id) {
-  const book = books.find((book) => book.id === id);
+  const book = booksList.find((book) => book.id === id); //or books instead of booksList (if mockapi)
   if (favBooks.includes(book)) {
     book.isFavourite = false;
     const index = favBooks.indexOf(book);
     favBooks.splice(index, 1);
   } else {
-    book.isFavourite = true;
+    // book.isFavourite = true;
     favBooks.push(book);
   }
   console.log("fav books in api", favBooks);

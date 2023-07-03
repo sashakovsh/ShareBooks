@@ -17,6 +17,7 @@ const AuthPage = () => {
           dispatch(setAuth(true));
           localStorage.authenticated = true;
           localStorage.userName = res.user.name;
+          localStorage.userId = res.user.id;
         });
       });
 
@@ -26,7 +27,7 @@ const AuthPage = () => {
         duration: 2,
       });
 
-      navigate("/main");
+      navigate("/");
     } catch (err) {
       console.warn("LoginForm", err.message);
 

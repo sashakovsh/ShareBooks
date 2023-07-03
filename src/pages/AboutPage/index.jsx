@@ -15,8 +15,8 @@ const AboutPage = () => {
   };
 
   return (
-    <>
       <DefaultLayout>
+        <>
         <p>Здесь будет страница о проекте</p>
         <button className={styles.recsBtn} onClick={redirect}>
             {localStorage.authenticated 
@@ -24,8 +24,8 @@ const AboutPage = () => {
               : 'Присоединиться'
             }
         </button>
+        </>
       </DefaultLayout>
-    </>
   );
 };
 

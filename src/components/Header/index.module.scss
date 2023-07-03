@@ -16,15 +16,15 @@ $font-family: 'Alegreya Sans SC', sans-serif;
 }
 
 .container {
-	max-width: $containerWidth;
-	padding: 10px 10px;
-	width: 100%;
-	margin: 0 auto;
+    max-width: $containerWidth;
+    padding: 10px 10px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .header {
     position: sticky;
-    margin-bottom: 135px;
+    margin-bottom: 50px;
     top: 0;
     z-index: 20;
     background-color: $main-color;
@@ -32,7 +32,7 @@ $font-family: 'Alegreya Sans SC', sans-serif;
 }
 
 .top {
-	flex-grow: 1;
+    flex-grow: 1;
 }
 
 .logo {
