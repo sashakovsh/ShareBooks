@@ -1,9 +1,9 @@
 import DefaultLayout from "../../layouts/DefaultLayout";
 import styles from "./index.module.scss";
-import { books, addFav } from "../../api/favBooks";
-import { booksList } from "../../api/books";
+// import { books, addFav } from "../../api/favouritesByUser";
+import { getBooks } from "../../api/books";
 import BookCard from "../../components/Books";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // const books = [
   // {
   //   id: 1,
@@ -27,15 +27,23 @@ import { useState } from "react";
 
 const CatalogPage = () => {
 
+  const [booksList, setBooksList] = useState([]);
+
+  useEffect(() => {
+    getBooks().then((res) => {
+      setBooksList(res);
+    })
+  }, []);
+
   const [startItem, setStartItem] = useState(0);
-  const [itemPerPage, setItemPerPage] = useState(12);
+  const [itemPerPage, setItemPerPage] = useState(3);
 
   const moreBooks = () => {
     if(booksList.length < itemPerPage) {
       return;
     } 
-    if(itemPerPage <= (booksList.length - 12)) {
-    setItemPerPage(itemPerPage + 12);
+    if(itemPerPage <= (booksList.length - 3)) {
+    setItemPerPage(itemPerPage + 3);
     } else {
       setItemPerPage(itemPerPage + (booksList.length - itemPerPage));
     }
