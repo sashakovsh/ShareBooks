@@ -5,18 +5,29 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { setAuth } from "../../redux/auth";
 import { useDispatch } from "react-redux";
+import { getToken, logout } from "../../api";
 
 const LogoutPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(localStorage.authenticated);
 
+  const logoutAsync = async () => {  
+    try {
+      await getToken().then( async (token) => {
+        await logout(token.csrfToken);
+      })
+      dispatch(setAuth(false));
+      localStorage.removeItem('authenticated');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userId');
+      setTimeout(() => navigate('/'), 1000);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  }
+  
   useEffect(() => {
-    dispatch(setAuth(false));
-    localStorage.removeItem("authenticated");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userId");
-    setTimeout(() => navigate("/"), 1000);
+    logoutAsync();
   });
 
   return (

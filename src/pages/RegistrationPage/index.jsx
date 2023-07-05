@@ -2,15 +2,22 @@ import { Form, Input, Button, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 import { getToken, register } from "../../api";
 import DefaultLayout from "../../layouts/DefaultLayout";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../redux/auth";
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onSubmit = async (values) => {
     try {
       await getToken().then(async (token) => {
         console.log(token);
-        await register(values, token);
+        await register(values, token).then( (resp) => {
+          dispatch(setAuth(true));
+          localStorage.userName = resp.user.name;
+          localStorage.userId = resp.user.id;
+        });
       });
 
       notification.success({
