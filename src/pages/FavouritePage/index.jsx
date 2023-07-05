@@ -1,55 +1,32 @@
-import React, { useEffect, useState } from "react";
-import DefaultLayout from "../../layouts/DefaultLayout";
+import { useEffect, useState } from "react";
 import "./index.module.scss";
-import { Card, Button } from "antd";
 import styles from "./index.module.scss";
-import { StarOutlined, StarFilled } from "@ant-design/icons";
-import { favBooks, addFav } from "../../api/favBooks";
-import { Link } from "react-router-dom";
-
-const { Meta } = Card;
+import BookCard from "../../components/Books";
+import { getList } from "../../api/favouritesByUser";
 
 const FavouritePage = () => {
-  const [favBooksList, setFavBooksList] = useState(favBooks);
+  const [favsBooksList, setFavsBooksList] = useState([]);
+  const id = localStorage.userId;
+  const list = async() => await getList();
+
+  useEffect(() => {
+    list().then((res) => {
+      setFavsBooksList(res);
+    })
+  }, [id]);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <h1> Вот список книг, на которые вы подписаны:</h1>
         <div className={styles.content}>
-          {favBooksList.map((book) => {
-            // if (book.isFavourite) {
-              return (
-                <div className={styles.bookBlock} key={book.id}>
-                  <Button
-                    className={styles.favBtn}
-                    icon={<StarFilled />}
-                    style={{ color: "#C44536" }}
-                    onClick={() => addFav(book.id)}
-                  />
-                  <Link className={styles.link} to={"/" + book.id}>
-                    <Card
-                      hoverable
-                      className={styles.card}
-                      style={{ width: 300 }}
-                      // key={book.id}
-                      cover={<img alt="example" src={book.img} />}
-                      // extra={
-                      //   <>
-                      //   <Button
-                      //     icon={<StarFilled />}
-                      //     style={{ color: "#C44536" }}
-                      //     onClick={() => (addFav(book.id), this.unfavourite(book.id))}
-                      //   />
-                      // }
-                    >
-                      <Meta title={book.name} description={book.author} />
-                    </Card>
-                  </Link>
-                </div>
-              );
-            // }
-          })}
+          <div className={styles.catalog_box}>
+          {favsBooksList.map((book) => (
+              <div className={styles.catalog_item} key={book.id}>
+                <BookCard book={book}></BookCard>
+              </div>
+          ))}
+          </div>
         </div>
       </div>
     </div>
