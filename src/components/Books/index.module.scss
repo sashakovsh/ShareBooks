@@ -118,3 +118,9 @@ $font-family: 'Alegreya Sans SC', sans-serif;
 .more_btn {
     color: $button-color;
 }
+
+.active {
+    background-color: transparent;
+    border: 1px solid #C44536;
+    color: #C44536;
+}

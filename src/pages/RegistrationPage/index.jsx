@@ -16,6 +16,7 @@ const RegistrationPage = () => {
         await register(values, token).then( (resp) => {
           dispatch(setAuth(true));
           dispatch(setAuthToken(resp.access_token));
+          localStorage.authenticated = true;
           localStorage.userName = resp.user.name;
           localStorage.userId = resp.user.id;
         });

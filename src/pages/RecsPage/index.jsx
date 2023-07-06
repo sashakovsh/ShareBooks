@@ -1,51 +1,42 @@
 import { Card } from "antd";
 import styles from "./index.module.scss";
-import { recBooks, addFav } from "../../api/favBooks";
-import { Link } from "react-router-dom";
+// import { recBooks, addFav } from "../../api/favouritesByUser";
+import BookCard from "../../components/Books";
+import { useEffect, useState } from "react";
+import { getRecommendations } from "../../api/recommendations";
 
-const { Meta } = Card;
+// const { Meta } = Card;
 
 const RecsPage = () => {
-  return (
-        <div className={styles.wrapper}>
-          {!recBooks.length ? (
-            <h2 style={{ paddingLeft: 155 }}>
-              Для начала, необходимо выбрать хотя бы одну книгу
-            </h2>
-          ) : (
-            <div className={styles.content}>
-              {recBooks.map((book) => (
-                <div className={styles.bookBlock} key={book.id}>
-                  {/* <Button
-                        className={styles.favBtn}
-                        icon={<StarOutlined />}
-                        style={{ color: "#C44536" }}
-                        onClick={() => addFav(book.id)}
-                    /> */}
-                  <Link className={styles.link} to={"/" + book.id}>
-                    <Card
-                      hoverable
-                      className={styles.card}
-                      style={{ width: 300 }}
-                      // key={book.id}
-                      cover={<img alt="example" src={book.img} />}
-                      // extra={
-                      //   <Button
-                      //     icon={<StarOutlined />}
-                      //     style={{ color: "#C44536" }}
-                      //     onClick={() => addFav(book.id)}
-                      //   />
-                      // }
-                    >
-                      <Meta title={book.name} description={book.author} />
-                    </Card>
-                  </Link>
+    const [recsBooksList, setRecsBooksList] = useState([]);
+    const id = +(localStorage.userId);
+
+    const getRecs = async () => {
+        await getRecommendations(id).then((res) => {
+            setRecsBooksList(res);
+        })
+    };
+    
+    useEffect(() => {
+      getRecs();
+    }, [id]);
+  
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.container}>
+          <h1> Взгляни на рекомендации:</h1>
+          <div className={styles.content}>
+            <div className={styles.catalog_box}>
+            {recsBooksList.map((book) => (
+                <div className={styles.catalog_item} key={book.id}>
+                  <BookCard book={book}></BookCard>
                 </div>
-              ))}
+            ))}
             </div>
-          )}
+          </div>
         </div>
-  );
+      </div>
+    );
 };
 
 export default RecsPage;

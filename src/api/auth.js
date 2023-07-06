@@ -37,6 +37,7 @@ export const login = async (values, token) => {
 
 export const logout = async (token, authToken) => {
   const res = await api.post(
+
     "http://localhost/api/logout",
     {},
     {
