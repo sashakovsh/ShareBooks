@@ -2,31 +2,30 @@ import DefaultLayout from "../../layouts/DefaultLayout";
 import styles from "./index.module.scss";
 import RecsPage from "../RecsPage";
 import FavouritePage from "../FavouritePage";
+import { useState } from "react";
 
 const ProfilePage = () => {
   const name = localStorage.userName;
+  const [showedFavs, setShowedFavs] = useState(false);
+  const [showedRecs, setShowedRecs] = useState(false);
 
   const showFavs = () => {
-    const favs = document.getElementById('favs');
-    const recs = document.getElementById('recs');
-    if(recs.classList.contains(styles.hidden)) {
-      favs.classList.toggle(styles.hidden);
+    if(!showedFavs) {
+      setShowedFavs(true);
+      setShowedRecs(false);
     } else {
-      recs.classList.toggle(styles.hidden);
-      favs.classList.toggle(styles.hidden);
+      setShowedFavs(false);
     }
-  }
+  };
 
   const showRecs = () => {
-    const favs = document.getElementById('favs');
-    const recs = document.getElementById('recs');
-    if(favs.classList.contains(styles.hidden)) {
-      recs.classList.toggle(styles.hidden);
+    if(!showedRecs) {
+      setShowedRecs(true);
+      setShowedFavs(false);
     } else {
-      favs.classList.toggle(styles.hidden);
-      recs.classList.toggle(styles.hidden);
+      setShowedRecs(false);
     }
-  }
+  };
 
   return (
     <DefaultLayout>
@@ -90,11 +89,11 @@ const ProfilePage = () => {
             <button onClick={() => showFavs()}>Посмотреть избранное</button>
             <button onClick={() => showRecs()}>Посмотреть рекомендации</button>
           </div>
-          <div id='favs' className={`${styles.favs} ${styles.hidden}`}>
-            <FavouritePage/>
+          <div id='favs' className={`${styles.favs}`}>
+            {showedFavs ? <FavouritePage/> : null}
           </div>
-          <div id='recs' className={`${styles.recs} ${styles.hidden}`}>
-            <RecsPage/>
+          <div id='recs' className={`${styles.recs}`}>
+            {showedRecs ? <RecsPage/> : null}
           </div>
         </div>
       </div>

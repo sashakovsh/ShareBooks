@@ -26,12 +26,10 @@ const BookCard = (book) => {
             await deleteFavourite(book.id, token);
             e.target.classList.toggle(styles.active);
             e.target.innerHTML = 'В избранное';
-            return;
           } else {
             await addFavourite( user_id, book_id, token);
             e.target.classList.toggle(styles.active);
             e.target.innerHTML = 'В избранном';
-            return;
           }
         })
       });
