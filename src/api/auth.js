@@ -35,7 +35,7 @@ export const login = async (values, token) => {
   return res.data;
 };
 
-export const logout = async (token) => {
+export const logout = async (token, authToken) => {
   const res = await api.post(
     "http://localhost/api/logout",
     {},
@@ -43,6 +43,7 @@ export const logout = async (token) => {
       withCredentials: true,
       headers: {
         "X-CSRF-TOKEN": token,
+        'Authorization': 'Bearer ' + authToken,
       },
     }
   );

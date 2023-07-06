@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getToken, register } from "../../api";
 import DefaultLayout from "../../layouts/DefaultLayout";
 import { useDispatch } from "react-redux";
-import { setAuth } from "../../redux/auth";
+import { setAuth, setAuthToken } from "../../redux/auth";
 
 const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ const RegistrationPage = () => {
         console.log(token);
         await register(values, token).then( (resp) => {
           dispatch(setAuth(true));
+          dispatch(setAuthToken(resp.access_token));
           localStorage.userName = resp.user.name;
           localStorage.userId = resp.user.id;
         });
