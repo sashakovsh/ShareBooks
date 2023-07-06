@@ -4,23 +4,29 @@ import { Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { setAuth } from "../../redux/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getToken, logout } from "../../api";
 
 const LogoutPage = () => {
+  const access_token = useSelector( (state) => state.auth.authToken );
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const logoutAsync = async () => {  
     try {
       await getToken().then( async (token) => {
-        await logout(token.csrfToken);
+        await logout(token.csrfToken, access_token);
       })
       dispatch(setAuth(false));
       localStorage.removeItem('authenticated');
       localStorage.removeItem('userName');
       localStorage.removeItem('userId');
-      setTimeout(() => navigate('/'), 1000);
+      // вот насчет истории ниже я не уверен...
+      document.cookie.split(';').forEach(function(c) {
+        document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
+      });
+      navigate('/');
     } catch (error) {
       console.log(error.response.data.message);
     }

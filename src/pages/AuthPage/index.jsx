@@ -2,7 +2,7 @@ import { Form, Input, Button, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getToken, login } from "../../api";
-import { setAuth } from "../../redux/auth";
+import { setAuth, setAuthToken } from "../../redux/auth";
 import DefaultLayout from "../../layouts/DefaultLayout";
 
 const AuthPage = () => {
@@ -15,6 +15,7 @@ const AuthPage = () => {
         console.log(token);
         await login(values, token).then((res) => {
           dispatch(setAuth(true));
+          dispatch(setAuthToken(res.access_token))
           localStorage.authenticated = true;
           localStorage.userName = res.user.name;
           localStorage.userId = res.user.id;
