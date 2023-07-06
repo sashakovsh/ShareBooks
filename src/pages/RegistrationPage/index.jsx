@@ -15,6 +15,7 @@ const RegistrationPage = () => {
         console.log(token);
         await register(values, token).then( (resp) => {
           dispatch(setAuth(true));
+          localStorage.authenticated = true;
           localStorage.userName = resp.user.name;
           localStorage.userId = resp.user.id;
         });
