@@ -22,6 +22,7 @@ const LogoutPage = () => {
       localStorage.removeItem('authenticated');
       localStorage.removeItem('userName');
       localStorage.removeItem('userId');
+      localStorage.removeItem('created_at');
       // вот насчет истории ниже я не уверен...
       document.cookie.split(';').forEach(function(c) {
         document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');

@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import "./index.module.scss";
 import styles from "./index.module.scss";
 import BookCard from "../../components/Books";
-import { getList } from "../../api/favouritesByUser";
+import { getFavouritesByUser } from "../../api/favourites";
 
 const FavouritePage = () => {
   const [favsBooksList, setFavsBooksList] = useState([]);
   const id = localStorage.userId;
-  const list = async() => await getList();
+  const list = async() => await getFavouritesByUser(id);
 
   useEffect(() => {
     list().then((res) => {
@@ -18,7 +18,6 @@ const FavouritePage = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <h1> Вот список книг, на которые вы подписаны:</h1>
         <div className={styles.content}>
           <div className={styles.catalog_box}>
           {favsBooksList.map((book) => (
