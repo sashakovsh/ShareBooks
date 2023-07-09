@@ -3,19 +3,19 @@ import { useState } from "react";
 
 const SearchForm = () => {
 
-  const [search, setSearch] = useState({
-    data: "",
+  const [text, setSearch] = useState({
+    text: "",
   });
 
   const handleChange = (e) => {
     const nextFormState = {
-      ...search,
+      ...text,
       [e.target.name]: e.target.value,
     };
     setSearch(nextFormState);
   };
 
-  const onSubmit = async () => { //get search results
+  const onSubmit = async () => {
   }
 
   return (
@@ -23,7 +23,8 @@ const SearchForm = () => {
       <form className={styles.search_form}>
         <input 
           className={styles.search_input} 
-          value={search.data} onChange={(e) => handleChange(e)}
+          value={text.text} onChange={(e) => handleChange(e)}
+          name="text"
           type="text" 
           placeholder="Введите запрос"/>
         <button 
