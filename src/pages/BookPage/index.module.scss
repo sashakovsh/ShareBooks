@@ -98,7 +98,7 @@ $font-family: 'Alegreya Sans SC', sans-serif;
         z-index: -1;
         width: 100%;
         height: 100%;
-        background-image: url('./main_img/castle.svg');
+        background-image: url('/main_img/castle.svg');
         background-repeat: no-repeat;
         background-position: right bottom 20px;
         opacity: 0.2;
@@ -196,7 +196,7 @@ $font-family: 'Alegreya Sans SC', sans-serif;
             box-shadow: $box_shadow;
         }
         &::before {
-            content: url('./book_img/Arrow.svg');
+            content: url('/book_img/Arrow.svg');
             padding-right: 15px;
             position: relative;
             top: 3px;

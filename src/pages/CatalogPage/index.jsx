@@ -20,15 +20,25 @@ const CatalogPage = () => {
   const [itemPerPage, setItemPerPage] = useState(3); //will be chanched (after another get request)
 
   const moreBooks = () => { //will be chanched (after another get request)
-    if(booksList.length < itemPerPage) {
-      return;
-    } 
-    if(itemPerPage <= (booksList.length - 3)) {
-    setItemPerPage(itemPerPage + 3);
-    } else {
-      setItemPerPage(itemPerPage + (booksList.length - itemPerPage));
-    }
+    // if(booksList.length < itemPerPage) {
+    //   return;
+    // } 
+    // if(itemPerPage <= (booksList.length - 3)) {
+    // setItemPerPage(itemPerPage + 3);
+    // } else {
+    //   setItemPerPage(itemPerPage + (booksList.length - itemPerPage));
+    // }
+    getBooks().then((res) => {
+      console.log(res, booksList);
+      const data = [...booksList];
+      for(const item of res) {
+        data.push(item);
+      }
+      setBooksList(data);
+    })
   }
+
+  console.log(booksList);
   
   return (
     <DefaultLayout>
@@ -41,10 +51,11 @@ const CatalogPage = () => {
                 <details>
                   <summary className={styles.menu__items}>Жанры</summary>
                   <div className={styles['dropdown-menu']}>
-                    <div href="#" className={styles['dropdown-menu__item']}>
-                      {/* onclick={}> */}
-                      Фантастика
-                    </div>
+                  {booksList.map((book) => ( 
+                      <div href="#" key={book.id} className={styles['dropdown-menu__item']}>
+                        {book.category}
+                      </div>
+                    ))}
                   </div>
                 </details>
               </div>
@@ -67,7 +78,12 @@ const CatalogPage = () => {
         </div>
         <div className={`${styles.content} ${styles.container}`}>
           <div className={styles.catalog_box}>
-            {booksList.slice(startItem,itemPerPage).map((book) => ( //will be chanched (after another get request)
+            {/* {booksList.slice(startItem,itemPerPage).map((book) => ( //will be chanched (after another get request)
+              <div className={styles.catalog_item} key={book.id}>
+                <BookCard book={book}></BookCard>
+              </div>
+            ))} */}
+            {booksList.map((book) => ( //will be chanched (after another get request)
               <div className={styles.catalog_item} key={book.id}>
                 <BookCard book={book}></BookCard>
               </div>
@@ -82,8 +98,8 @@ const CatalogPage = () => {
               <img 
                 className={styles.content_right_img} 
                 src={localStorage.authenticated
-                      ? "./main_img/castle.svg"
-                      : "./main_img/planet.svg"} 
+                      ? "/main_img/castle.svg"
+                      : "/main_img/planet.svg"} 
                 alt="ShareBooks"/>
           </div>
         </div>

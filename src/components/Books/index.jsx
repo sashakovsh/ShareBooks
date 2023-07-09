@@ -51,7 +51,7 @@ const BookCard = (book) => {
           <img src={book.book.img} alt=""/>
         </div>
           <div className={styles.catalog_item_structure}>
-            <p className={styles.catalog_item_title}>{book.book.name}</p>
+            <p className={styles.catalog_item_title}>{book.book.name.substring(0, 85)}</p>
             <p className={styles.catalog_item_author}>{book.book.author}</p>
             <p className={styles.catalog_item_favoriteStats}> в избранном у {book.book.favourites_count} читателей</p>
             <p className={styles.catalog_item_description}>{book.book.description.substring(0, 51)}

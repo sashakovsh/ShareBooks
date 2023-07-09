@@ -71,8 +71,8 @@ const RegistrationPage = () => {
               <img className={styles.registration_ellipse3} src="./registration_img/Ellipse3.png" alt=""/>
               <img className={styles.registration_planet} 
                 src={localStorage.authenticated
-                  ? "./main_img/castle.svg" 
-                  : "./main_img/planet.svg"}
+                  ? "/main_img/castle.svg" 
+                  : "/main_img/planet.svg"}
                 alt=""/>
 
               <div className={styles.registration_left}>

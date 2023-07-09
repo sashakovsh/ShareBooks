@@ -7,13 +7,13 @@ const Footer = () => {
           <h2>ShareBooks &copy; 2023</h2>
           <div className={styles.social}>
               <a className={styles.telegramm} target="_blank" href="#">
-                  <img src="./main_img/telegram.svg" alt="telegramm"/> 
+                  <img src="/main_img/telegram.svg" alt="telegramm"/> 
               </a>
               <a className={styles.vk} target="_blank" href="#"> 
-                <img src="./main_img/vk.svg" alt="VK"/>
+                <img src="/main_img/vk.svg" alt="VK"/>
               </a>
               <a className={styles.instagram} target="_blank" href="#">
-                <img src="./main_img/instagram.svg" alt="instagram"/>
+                <img src="/main_img/instagram.svg" alt="instagram"/>
               </a>
           </div>
       </div>

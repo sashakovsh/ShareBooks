@@ -71,10 +71,10 @@ const AuthPage = () => {
                 <div className={styles.authorization_box}>
                     <div className={styles.authorization_left}>
                         <p className={styles.authorization_text}><span>С возвращением!</span></p>
-                        <p className={styles.authorization_passRecovery}><span>Забыли пароль? </span>
+                        {/* <p className={styles.authorization_passRecovery}><span>Забыли пароль? </span>
                             <Link>Восстановить</Link>
-                        </p>
-                        <img src="./auth_img/Banner.svg" alt=""/>
+                        </p> */}
+                        <img src="/auth_img/Banner.svg" alt=""/>
                     </div>
                     <div className={styles.authorization_right}>
                         <form 
@@ -108,8 +108,8 @@ const AuthPage = () => {
                         </div>
                         <img 
                         src={localStorage.authenticated
-                          ? "./main_img/castle.svg"
-                          : "./main_img/planet.svg"}  
+                          ? "/main_img/castle.svg"
+                          : "/main_img/planet.svg"}  
                         alt=""/>
                     </div>
                 </div>

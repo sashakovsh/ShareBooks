@@ -47,7 +47,7 @@ const ProfilePage = () => {
                   <p>В сообществе с {date}</p>
                 </div>
                 <div className={styles.profile_info_picture}>
-                  <img src="./profile_img/avatar_default.svg" alt="profile image"/>
+                  <img src="/profile_img/avatar_default.svg" alt="profile image"/>
                 </div>
                 <div className={styles.profile_info_description}>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum 

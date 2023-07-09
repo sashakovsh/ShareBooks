@@ -11,6 +11,9 @@ const FavouritePage = () => {
 
   useEffect(() => {
     list().then((res) => {
+      for(const item of res) {
+        item.id = item.book_id
+      }
       setFavsBooksList(res);
     })
   }, [id]);
