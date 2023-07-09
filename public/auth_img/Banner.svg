@@ -1,0 +1,38 @@
+<svg width="530" height="832" viewBox="0 0 530 832" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_b_180_826)">
+<g clip-path="url(#clip0_180_826)">
+<rect width="530" height="832" rx="30" fill="url(#paint0_linear_180_826)" fill-opacity="0.8"/>
+<circle cx="481" cy="232" r="150" fill="url(#paint1_radial_180_826)" fill-opacity="0.8"/>
+<circle cx="89.5" cy="784.5" r="113.5" fill="url(#paint2_radial_180_826)" fill-opacity="0.8"/>
+<circle cx="44.5" cy="39.5" r="95.5" fill="url(#paint3_radial_180_826)" fill-opacity="0.8"/>
+</g>
+<rect x="0.5" y="0.5" width="529" height="831" rx="29.5" stroke="#197278" stroke-opacity="0.4"/>
+</g>
+<defs>
+<filter id="filter0_b_180_826" x="-4" y="-4" width="538" height="840" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="2"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_180_826"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_180_826" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_180_826" x1="6.21286e-06" y1="355.68" x2="530" y2="355.68" gradientUnits="userSpaceOnUse">
+<stop stop-color="#197278" stop-opacity="0.7"/>
+<stop offset="1" stop-color="#196B78" stop-opacity="0.2"/>
+</linearGradient>
+<radialGradient id="paint1_radial_180_826" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(481 232) rotate(90) scale(150)">
+<stop stop-color="#197278" stop-opacity="0.3"/>
+<stop offset="1" stop-color="#E0CFC6" stop-opacity="0.6"/>
+</radialGradient>
+<radialGradient id="paint2_radial_180_826" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(89.5 784.5) rotate(90) scale(113.5)">
+<stop stop-color="#197278" stop-opacity="0.1"/>
+<stop offset="1" stop-color="#E0CFC6" stop-opacity="0.6"/>
+</radialGradient>
+<radialGradient id="paint3_radial_180_826" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(44.5 39.5) rotate(90) scale(95.5)">
+<stop stop-color="#197278" stop-opacity="0.1"/>
+<stop offset="1" stop-color="#E0CFC6" stop-opacity="0.6"/>
+</radialGradient>
+<clipPath id="clip0_180_826">
+<rect width="530" height="832" rx="30" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,18 +1,15 @@
 import styles from "./index.module.scss";
 import { Link } from "react-router-dom";
-// import { addFav } from "../../api/favBooks";
 import { addFavourite, deleteFavourite, getFavourite } from "../../api/favourites";
 import { getToken } from "../../api";
 import { notification } from "antd";
 
 const BookCard = (book) => {
-  console.log(book);
 
   const addFav = async (e, user_id, book_id) => {
     const favourites = [];
     try {
       await getToken().then(async (token) => {
-        console.log(token);
         await getFavourite().then((res) => {
           for(const obj of res) {
             if(obj.user_id == user_id) {
@@ -21,7 +18,6 @@ const BookCard = (book) => {
           }
         }).then(async() => {
           const book = favourites.find((book) => book.book_id == book_id);
-          console.log(book);
           if(book) {
             await deleteFavourite(book.id, token);
             e.target.classList.toggle(styles.active);
@@ -57,8 +53,7 @@ const BookCard = (book) => {
           <div className={styles.catalog_item_structure}>
             <p className={styles.catalog_item_title}>{book.book.name}</p>
             <p className={styles.catalog_item_author}>{book.book.author}</p>
-            <p className={styles.catalog_item_favoriteStats}> в избранном у [число] читателей</p>
-            {/* comment out next <p> if use mockapi */}
+            <p className={styles.catalog_item_favoriteStats}> в избранном у {book.book.favourites_count} читателей</p>
             <p className={styles.catalog_item_description}>{book.book.description.substring(0, 51)}
               <Link className={styles.more_btn} to={'/' + (book.book.id)}> ...Подробнее</Link>
             </p>

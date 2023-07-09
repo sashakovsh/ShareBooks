@@ -71,17 +71,21 @@ $font-family: 'Alegreya Sans SC', sans-serif;
     
     }
     &_right {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
         @media (max-width: 768px) {
-            position: absolute;
+            bottom: 0;
             width: calc(100%/2);
             margin-top: 25px;
-            z-index: -1; 
         }
     }
     &_right_img {
         margin-top: -60px;
         width: 110%;
         height: auto;
+        opacity: 10%;
 
         @media (max-width: 768px) {
             opacity: 0.4;
@@ -202,47 +206,6 @@ details[open] .menu__items::after {
     top: 2px;
 }
 
-.search {
-    max-width: 165px;
-    border-radius: 10px; 
-    overflow: inherit;
-    &_form {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: $main-color; 
-        border-radius: 10px; 
-    }
-    &_input[type="text"] {
-        border: none;
-        max-width: calc(100% - 50px);
-        font-size: 14px;
-        margin: 5px 10px;
-        background-color: $main-color; 
-        color: $currentPage-color;
-        font-family: $font-family;      
-        &:focus {
-            outline: none;
-        }
-        &::placeholder {
-            font-family: $font-family;      
-            font-weight: 500; 
-            color: rgba($currentPage-color, 0.35);
-        }
-    }
-    &_button {
-        max-width: 80px;
-        border: none;
-        background-color: $main-color;
-        border-radius: 10px; 
-        &:hover   {
-                cursor: pointer;
-                transform: scale(1.2);
-                
-        }
-    }
-}
-
 .catalog_box {
     display: flex;
     justify-content: center;
@@ -275,7 +238,7 @@ details[open] .menu__items::after {
 .load_button {
     display: flex;
     justify-content: center;
-    margin-bottom: 200px;
+    margin-bottom: 250px;
 
     & button {
         font-family: $font-family;      
@@ -291,16 +254,5 @@ details[open] .menu__items::after {
             background-color: rgba($button-color, 0.6);
             box-shadow: $box_shadow;
         }
-    }
-}
-
-.bg_block {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: -1;
-
-    &_img {
-        opacity: 10%;
     }
 }

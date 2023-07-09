@@ -1,29 +1,10 @@
 import DefaultLayout from "../../layouts/DefaultLayout";
 import styles from "./index.module.scss";
-// import { books, addFav } from "../../api/favouritesByUser";
 import { getBooks } from "../../api/books";
 import BookCard from "../../components/Books";
 import { useState, useEffect } from "react";
-// const books = [
-  // {
-  //   id: 1,
-  //   name: "Перемените обстановку",
-  //   author: "Джеймс Хедли Чейз",
-  //   img: "https://knigopoisk.org/media/books/55/553425d52eb5d.jpg",
-  // },
-  // {
-  //   id: 2,
-  //   name: "Легион. Ложь и тайна",
-  //   author: "Дэн Абнетт",
-  //   img: "https://knigopoisk.org/media/books/le/legion-lozh-i-tayna--62459.jpg",
-  // },
-  // {
-  //   id: 3,
-  //   name: "Племя тьмы",
-  //   author: "Клайв Баркер",
-  //   img: "https://knigopoisk.org/media/books/pl/plemya-t-my--82224.jpg",
-  // },
-// ];
+import SearchForm from "../../components/Search";
+
 
 const CatalogPage = () => {
 
@@ -36,9 +17,9 @@ const CatalogPage = () => {
   }, []);
 
   const [startItem, setStartItem] = useState(0);
-  const [itemPerPage, setItemPerPage] = useState(3);
+  const [itemPerPage, setItemPerPage] = useState(3); //will be chanched (after another get request)
 
-  const moreBooks = () => {
+  const moreBooks = () => { //will be chanched (after another get request)
     if(booksList.length < itemPerPage) {
       return;
     } 
@@ -47,7 +28,6 @@ const CatalogPage = () => {
     } else {
       setItemPerPage(itemPerPage + (booksList.length - itemPerPage));
     }
-    console.log(itemPerPage);
   }
   
   return (
@@ -72,9 +52,8 @@ const CatalogPage = () => {
                 <details>
                   <summary className={styles.menu__items}>Авторы</summary>
                   <div className={styles['dropdown-menu']}>
-                    {booksList.map((book) => ( //or books instead of booksList (if mapping from mockapi)
+                    {booksList.map((book) => ( 
                       <div href="#" key={book.id} className={styles['dropdown-menu__item']}>
-                        {/* onclick={}> */}
                         {book.author}
                       </div>
                     ))}
@@ -83,38 +62,30 @@ const CatalogPage = () => {
               </div>
             </menu>
 
-            <div className={styles.search}>
-              <form className={styles.search_form}>
-                <input className={styles.search_input} type="text" placeholder="Введите запрос"/>
-                <button className={styles.search_button} type="submit">
-                  <img src="/catalog_img/Search.svg" alt=""/>
-                </button>
-              </form>
-            </div>
+            <SearchForm/>
           </div>
         </div>
         <div className={`${styles.content} ${styles.container}`}>
           <div className={styles.catalog_box}>
-            {booksList.slice(startItem,itemPerPage).map((book) => ( //or books instead of booksList (if mapping from mockapi) + without .slice()
+            {booksList.slice(startItem,itemPerPage).map((book) => ( //will be chanched (after another get request)
               <div className={styles.catalog_item} key={book.id}>
                 <BookCard book={book}></BookCard>
               </div>
             ))}
           </div>
-          {/* button for api books */}
           <div className={styles.load_button}>
             <button onClick={moreBooks}>
               <span>Ещё книги...</span>
             </button>
           </div>
-          <div className={styles.bg_block}>
+          <div className={styles.content_right}>
               <img 
-                className={styles.bg_block_img} 
+                className={styles.content_right_img} 
                 src={localStorage.authenticated
                       ? "./main_img/castle.svg"
                       : "./main_img/planet.svg"} 
                 alt="ShareBooks"/>
-            </div>
+          </div>
         </div>
       </div>
       </>

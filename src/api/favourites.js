@@ -1,6 +1,6 @@
 import api from "../core/axios";
 
-//get all favourites
+//get all favourites (data about favourites without books)
 export const getFavourite = async () => {
     const res = await api.get(
       `http://localhost:80/api/favourites`,
@@ -40,4 +40,26 @@ export const deleteFavourite = async (id, token) => {
         }
       );
       return res.data;
+};
+
+//get user's favourite books
+export const getFavouritesByUser = async (user_id, token) => {
+  const data = [];
+  const res = await api.get(
+    `http://localhost:80/api/favourites/${user_id}`, 
+    {'user_id': user_id},
+    { withCredentials: true },
+    {
+      headers: {
+        "X-CSRF-TOKEN": token,
+      },
+    }
+  ).then((res) => {
+    for(let book of res.data){
+      book.isFav = true;
+      data.push(book);
+    }
+  })
+  console.log(data);
+  return data;
 };
