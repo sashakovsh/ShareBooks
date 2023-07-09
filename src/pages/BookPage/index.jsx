@@ -19,7 +19,8 @@ const BookPage = () => {
   const findBook = async() => {
     await getOneBook(+(params.id)).then(async (res) => {
       const currentBook = res[0];
-      await getFavouritesByUser(id).then((res) =>{
+      if(id){      
+        await getFavouritesByUser(id).then((res) =>{
         for(const book of res) {
           if(book.book_id == currentBook.id) {
             currentBook.isFav = true;
@@ -27,7 +28,7 @@ const BookPage = () => {
             currentBook.isFav = false;
           }
         }
-      })
+      })}
       setBook(currentBook);
     });
   }
