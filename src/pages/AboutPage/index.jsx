@@ -28,20 +28,15 @@ const AboutPage = () => {
         <main className={`${styles.content} ${styles.container}`}>
           <div className={styles.content_left}>
             <h1>Узнать больше о нас</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Obcaecati, saepe voluptatibus. Quos, molestiae sed tempore rerum 
-              quam soluta, laboriosam commodi ipsam dolorem reiciendis officiis? 
-              Architecto ipsum accusamus labore sunt, voluptatibus porro animi 
-              rem!
+            <p>Добро пожаловать на наш сайт, посвященный поиску рекомендаций по книгам! Мы - команда книжных энтузиастов и библиофилов, которые разделяют страсть к чтению и неутолимое желание делиться своими литературными открытиями.
             </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Obcaecati, saepe voluptatibus. Quos, molestiae sed tempore rerum. 
+            <p>В мире существует огромное количество книг, и порой найти следующую хорошую книгу может быть похоже на поиск иглы в стоге сена. Мы понимаем, что каждый читатель уникален и имеет свои предпочтения, поэтому наша цель - помочь вам найти именно ту книгу, которая откроет вам новые горизонты, вдохновит и перевернет ваше представление о чтении.
             </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Obcaecati, saepe voluptatibus. Quos, molestiae sed tempore rerum.
+            <p>Мы предлагаем удобный и интуитивно понятный интерфейс, где вы можете создать свой список любимых книг, указав произведения, которые вас впечатлили. Наш алгоритм тщательно анализирует ваш список и предлагает вам персонализированные рекомендации, основываясь на предпочтениях пользователей со схожими интересами.
             </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Obcaecati, saepe voluptatibus. Quos, molestiae sed tempore rerum.
+            <p>Наша миссия - не только помочь вам найти следующую книгу для чтения, но и стимулировать интерес к литературе, расширить ваш кругозор и подарить вам моменты удовольствия и размышлений, которые способна дать только хорошая книга.
+            </p>
+            <p>Присоединяйтесь к нам сегодня и откройте новые миры литературы вместе с нами!
             </p>
             <div className={styles.content_buttons}>
               <button 
