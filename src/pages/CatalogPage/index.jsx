@@ -16,8 +16,8 @@ const CatalogPage = () => {
     })
   }, []);
 
-  const [startItem, setStartItem] = useState(0);
-  const [itemPerPage, setItemPerPage] = useState(3); //will be chanched (after another get request)
+  // const [startItem, setStartItem] = useState(0);
+  // const [itemPerPage, setItemPerPage] = useState(3); //will be chanched (after another get request)
 
   const moreBooks = () => { //will be chanched (after another get request)
     // if(booksList.length < itemPerPage) {
@@ -47,7 +47,7 @@ const CatalogPage = () => {
         <div className={styles['menu_box--color']}>
           <div className={`${styles.menu_box} ${styles.container}`}>
             <menu className={styles.menu}>
-              <div className={`${styles.menu__item} ${styles['menu__item--has-dropdown']}`}>
+              {/* <div className={`${styles.menu__item} ${styles['menu__item--has-dropdown']}`}>
                 <details>
                   <summary className={styles.menu__items}>Жанры</summary>
                   <div className={styles['dropdown-menu']}>
@@ -70,7 +70,7 @@ const CatalogPage = () => {
                     ))}
                   </div>
                 </details>
-              </div>
+              </div> */}
             </menu>
 
             <SearchForm/>

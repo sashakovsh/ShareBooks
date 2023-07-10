@@ -28,20 +28,23 @@ const AboutPage = () => {
         <main className={`${styles.content} ${styles.container}`}>
           <div className={styles.content_left}>
             <h1>Узнать больше о нас</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Obcaecati, saepe voluptatibus. Quos, molestiae sed tempore rerum 
-              quam soluta, laboriosam commodi ipsam dolorem reiciendis officiis? 
-              Architecto ipsum accusamus labore sunt, voluptatibus porro animi 
-              rem!
+            <p>Share Books - это проект, который помогает людям найти новые и 
+              интересные книги для чтения. В нашем каталоге вы найдете описание 
+              книг, какому количеству пользователей понравилась та или иная 
+              книга, а также рекомендации на основе ваших предпочтений и истории 
+              чтения.
             </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Obcaecati, saepe voluptatibus. Quos, molestiae sed tempore rerum. 
+            <p>Мы верим, что чтение - это не только увлекательное занятие, но и 
+              важный источник знаний и развития.</p>
+            <p>Мы стремимся создать сообщество людей, которые разделяют свои 
+              знания и интересы на тему чтения. Мы поощряем пользователей 
+              делиться своими предпочтениями, делая рекомендации для себя и 
+              других пользователей ещё точнее.
             </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Obcaecati, saepe voluptatibus. Quos, molestiae sed tempore rerum.
-            </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Obcaecati, saepe voluptatibus. Quos, molestiae sed tempore rerum.
+            <p>Наша цель - сделать поиск новых книг простым, удобным и 
+              увлекательным. Мы надеемся, что наш проект поможет вам расширить 
+              свой кругозор, обнаружить новых авторов и жанры, а также 
+              наслаждаться чтением еще больше.
             </p>
             <div className={styles.content_buttons}>
               <button 

@@ -50,8 +50,8 @@ const ProfilePage = () => {
                   <img src="/profile_img/avatar_default.svg" alt="profile image"/>
                 </div>
                 <div className={styles.profile_info_description}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum 
-                  dicta maiores alias, dolorum, dolorem ab explicabo ipsam.
+                  Здесь можно проверить список избранного, изучить предложенные 
+                  рекомендации, и пополнить список полюбившихся книг.
                 </div>
               </div>
               <div className={styles.profile_buttons}>
