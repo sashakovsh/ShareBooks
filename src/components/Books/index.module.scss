@@ -46,13 +46,13 @@ $font-family: 'Alegreya Sans SC', sans-serif;
     }
     &_title {
         color: $main-font-color;
-        font-size: 16px; 
+        font-size: 14px; 
         font-weight: 500; 
         // white-space: nowrap;
     }
     &_author {
         color: $button-color;
-        font-size: 14px; 
+        font-size: 12px; 
         font-weight: 500; 
         margin-bottom: 15px;
     }
@@ -66,7 +66,7 @@ $font-family: 'Alegreya Sans SC', sans-serif;
     }
     &_description {
         color: $main-font-color;
-        font-size: 14px; 
+        font-size: 12px; 
         font-weight: 300; 
         margin-bottom: 10px;
         max-width: 175px;

@@ -124,7 +124,7 @@ $font-family: 'Alegreya Sans SC', sans-serif;
         cursor: pointer;
         margin-right: 30px;
         &:after {
-            content: url(/catalog_img/Vector\ 1.svg);
+            content: url('/catalog_img/Vector\ 1.svg');
             position: absolute;
             right:-1em;
             top: 2px;

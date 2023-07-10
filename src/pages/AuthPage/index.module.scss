@@ -263,7 +263,7 @@ $font-family: 'Alegreya Sans SC', sans-serif;
         background-color:  #ebbfa5; // Фоновый цвет для области галочки при выборе
       }
       &:checked::after {
-        content: url('./auth_img/check.svg');
+        content: url('/auth_img/check.svg');
         position: absolute;
         top: 3px;
         left: -2px;

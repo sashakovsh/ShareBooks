@@ -10,6 +10,7 @@ import BookPage from "./BookPage";
 import MainPage from "./MainPage";
 import AboutPage from "./AboutPage";
 import ProtectedRoute from "../components/ProtectedRoute";
+import SearchPage from "./SearchPage";
 
 
 const RouteComponent = () => {
@@ -34,6 +35,7 @@ const RouteComponent = () => {
       <Route path="/logout" element={<LogoutPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/search/:text" element={<SearchPage />} />
     </Routes>
   );
 };

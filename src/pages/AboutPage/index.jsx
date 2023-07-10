@@ -58,8 +58,8 @@ const AboutPage = () => {
             <img 
               className={styles.content_right_img} 
               src={localStorage.authenticated
-                ? "./main_img/castle.svg"
-                : "./main_img/planet.svg"} 
+                ? "/main_img/castle.svg"
+                : "/main_img/planet.svg"} 
               alt="ShareBooks"/>          
           </div>
         </main>

@@ -19,16 +19,14 @@ const BookPage = () => {
   const findBook = async() => {
     await getOneBook(+(params.id)).then(async (res) => {
       const currentBook = res[0];
-      if(id){      
+      if(localStorage.authenticated){      
         await getFavouritesByUser(id).then((res) =>{
         for(const book of res) {
           if(book.book_id == currentBook.id) {
             currentBook.isFav = true;
-          } else {
-            currentBook.isFav = false;
           }
         }
-      })}
+      })} 
       setBook(currentBook);
     });
   }
@@ -36,6 +34,8 @@ const BookPage = () => {
   useEffect(() => {
     findBook();
   }, [])
+
+  console.log(book);
   
   const addFav = async (e, user_id, book_id) => {
     const favourites = [];
@@ -101,7 +101,7 @@ const BookPage = () => {
                   <div className={styles.book_description_structure}>
                     <p className={styles.book_description_title}>{book.name}</p>
                     <p className={styles.book_description_author}>{book.author}</p>
-                    <p className={styles.book_description_genre}> Жанр:</p>
+                    <p className={styles.book_description_genre}> Жанр: {book.category}</p>
                     <p className={styles.book_description_description}>{book.description}</p>
                     {localStorage.authenticated
                       ? <button 
