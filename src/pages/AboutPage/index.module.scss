@@ -143,13 +143,13 @@ $font-family: 'Alegreya Sans SC', sans-serif;
     }
     & p {
         max-width: 400px;
-        margin-bottom: 50px;
+        margin-bottom: 15px;
         padding: 10px;
         text-align: justify;
     }
-    & p:not(:first-of-type) {
-        margin-bottom: 15px;
-    }
+    // & p:not(:first-of-type) {
+    //     margin-bottom: 15px;
+    // }
 }
 
 .button {
